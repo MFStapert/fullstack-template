@@ -2,9 +2,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../out-tsc/spec",
+    "outDir": "../../out-tsc/ui",
     "types": [
-      "jasmine"
+      "jest"
     ]
   },
   "include": [

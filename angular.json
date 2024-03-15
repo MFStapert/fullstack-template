@@ -63,7 +63,10 @@
               "buildTarget": "website:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 8080
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -72,21 +75,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "frontend/website/tsconfig.spec.json",
-            "assets": [
-              "frontend/website/src/favicon.ico",
-              "frontend/website/src/assets"
-            ],
-            "styles": [
-              "frontend/website/src/styles.css"
-            ],
-            "scripts": []
+            "configPath": "./jest.config.ts"
           }
         }
       }
@@ -151,7 +142,10 @@
               "buildTarget": "cms:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 8081
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -160,21 +154,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "frontend/cms/tsconfig.spec.json",
-            "assets": [
-              "frontend/cms/src/favicon.ico",
-              "frontend/cms/src/assets"
-            ],
-            "styles": [
-              "frontend/cms/src/styles.css"
-            ],
-            "scripts": []
+            "configPath": "./jest.config.ts"
           }
         }
       }
@@ -183,13 +165,13 @@
       "projectType": "application",
       "schematics": {},
       "root": "frontend/ui",
-      "sourceRoot": "frontend/ui/src",
+      "sourceRoot": "frontend/ui",
       "prefix": "ui",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "tsConfig": "frontend/ui/tsconfig.spec.json"
+            "configPath": "./jest.config.ts"
           }
         }
       }

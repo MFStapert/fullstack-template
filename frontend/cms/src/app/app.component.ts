@@ -7,6 +7,5 @@ import {TestComponent} from "@ui/test/test.component";
   standalone: true,
   imports: [RouterOutlet, TestComponent],
   template: '<ui-test></ui-test>',
-  styleUrl: './app.component.css'
 })
 export class AppComponent {}
