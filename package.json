@@ -2,13 +2,10 @@
   "name": "repo-test",
   "scripts": {
     "ng": "ng",
-    "start:cms": "ng serve cms",
-    "start:website": "ng serve website",
-    "build:cms": "ng build cms",
-    "build:website": "ng build website",
-    "test:cms": "ng test cms",
-    "test:website": "ng test website",
-    "test:ui": "ng test ui"
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "e2e:cms": "cypress open --e2e --browser electron"
   },
   "dependencies": {
     "@angular/animations": "17.2.0",
@@ -29,6 +26,7 @@
     "@angular/cli": "17.2.0",
     "@angular/compiler-cli": "17.2.0",
     "@types/jest": "^29.5.12",
+    "cypress": "^13.7.0",
     "jest": "^29.7.0",
     "typescript": "5.3.2"
   }
