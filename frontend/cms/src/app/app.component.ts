@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TestComponent } from '@common/ui/test/test.component';
+import { BackendService } from '@common/data-access/backend.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'cms-root',
   standalone: true,
-  imports: [TestComponent],
-  template: '<common-test>{{helloWorld}}</common-test>',
+  imports: [TestComponent, AsyncPipe],
+  template: '<common-test>{{helloWorld|async}}</common-test>',
+  providers: [BackendService],
 })
 export class AppComponent {
-  helloWorld = 'hello cms';
+  backend = inject(BackendService);
+  helloWorld = this.backend.getCms();
 }

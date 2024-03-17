@@ -1,8 +1,9 @@
 @backend_HostAddress = http://localhost:5078
+@backend_Proxy = http://localhost:4200/api
 
 GET {{backend_HostAddress}}/site/
 Accept: application/json
 
 ###
-GET {{backend_HostAddress}}/cms/
+GET {{backend_Proxy}}/site/
 Accept: application/json

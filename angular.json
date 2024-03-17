@@ -65,7 +65,8 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "port": 4201
+            "port": 4201,
+            "proxyConfig": "frontend/site/src/proxy.conf.json"
           }
         },
         "extract-i18n": {
@@ -144,7 +145,8 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "port": 4200
+            "port": 4200,
+            "proxyConfig": "frontend/cms/src/proxy.conf.json"
           }
         },
         "extract-i18n": {
