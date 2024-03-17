@@ -25,7 +25,7 @@
     ],
     "paths": {
       "@cms/*": ["./frontend/cms/src/*"],
-      "@website/*": ["./frontend/website/src/*"],
+      "@site/*": ["./frontend/site/src/*"],
       "@ui/*": ["./frontend/ui/*"],
     }
   },

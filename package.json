@@ -6,7 +6,7 @@
     "build": "ng build",
     "test": "ng test",
     "e2e:cms": "cypress open --e2e --browser electron",
-    "e2e:website": "playwright test --ui"
+    "e2e:site": "playwright test --ui"
   },
   "dependencies": {
     "@angular/animations": "17.2.0",

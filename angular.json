@@ -3,29 +3,29 @@
   "version": 1,
   "newProjectRoot": "frontend",
   "projects": {
-    "website": {
+    "site": {
       "projectType": "application",
       "schematics": {},
-      "root": "frontend/website",
-      "sourceRoot": "frontend/website/src",
+      "root": "frontend/site",
+      "sourceRoot": "frontend/site/src",
       "prefix": "site",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/website",
-            "index": "frontend/website/src/index.html",
-            "browser": "frontend/website/src/main.ts",
+            "outputPath": "dist/site",
+            "index": "frontend/site/src/index.html",
+            "browser": "frontend/site/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "frontend/website/tsconfig.app.json",
+            "tsConfig": "frontend/site/tsconfig.app.json",
             "assets": [
-              "frontend/website/src/favicon.ico",
-              "frontend/website/src/assets"
+              "frontend/site/src/favicon.ico",
+              "frontend/site/src/assets"
             ],
             "styles": [
-              "frontend/website/src/styles.css"
+              "frontend/site/src/styles.css"
             ],
             "scripts": []
           },
@@ -57,10 +57,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "website:build:production"
+              "buildTarget": "site:build:production"
             },
             "development": {
-              "buildTarget": "website:build:development"
+              "buildTarget": "site:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "website:build"
+            "buildTarget": "site:build"
           }
         },
         "test": {
