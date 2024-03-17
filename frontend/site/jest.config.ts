@@ -1,9 +1,9 @@
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   moduleNameMapper: {
-    "@ui/(.*)": "<rootDir>/frontend/ui/$1"
-  }
+    '@ui/(.*)': '<rootDir>/frontend/ui/$1',
+  },
 };
 
 export default config;

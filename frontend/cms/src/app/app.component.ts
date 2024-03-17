@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {TestComponent} from "@ui/test/test.component";
+import { TestComponent } from '@ui/test/test.component';
 
 @Component({
   selector: 'cms-root',
@@ -8,5 +8,5 @@ import {TestComponent} from "@ui/test/test.component";
   template: '<ui-test>{{helloWorld}}</ui-test>',
 })
 export class AppComponent {
-  helloWorld = "Hello cms"
+  helloWorld = 'Hello cms';
 }
