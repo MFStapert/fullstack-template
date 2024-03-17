@@ -19,11 +19,20 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
     "paths": {
-      "@cms/*": ["./frontend/cms/src/*"],
-      "@site/*": ["./frontend/site/src/*"],
-      "@ui/*": ["./frontend/ui/*"]
+      "@cms/*": [
+        "./frontend/cms/src/*"
+      ],
+      "@site/*": [
+        "./frontend/site/src/*"
+      ],
+      "@common/*": [
+        "./frontend/common/*"
+      ]
     }
   },
   "angularCompilerOptions": {

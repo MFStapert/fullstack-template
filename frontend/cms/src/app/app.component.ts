@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { TestComponent } from '@ui/test/test.component';
+import { TestComponent } from '@common/ui/test/test.component';
 
 @Component({
   selector: 'cms-root',
   standalone: true,
   imports: [TestComponent],
-  template: '<ui-test>{{helloWorld}}</ui-test>',
+  template: '<common-test>{{helloWorld}}</common-test>',
 })
 export class AppComponent {
   helloWorld = 'hello cms';

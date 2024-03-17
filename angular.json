@@ -161,12 +161,12 @@
         }
       }
     },
-    "ui": {
+    "common": {
       "projectType": "application",
       "schematics": {},
-      "root": "frontend/ui",
-      "sourceRoot": "frontend/ui",
-      "prefix": "ui",
+      "root": "frontend/common",
+      "sourceRoot": "frontend/common",
+      "prefix": "common",
       "architect": {
         "test": {
           "builder": "@angular-builders/jest:run",
