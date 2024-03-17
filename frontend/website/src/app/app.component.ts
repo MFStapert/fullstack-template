@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import {TestComponent} from "@ui/test/test.component";
 
 @Component({
   selector: 'site-root',
   standalone: true,
-  imports: [RouterOutlet, TestComponent],
+  imports: [ TestComponent],
   template: '<ui-test></ui-test>'
 })
 export class AppComponent {
