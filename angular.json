@@ -65,7 +65,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "port": 8080
+            "port": 4201
           }
         },
         "extract-i18n": {
@@ -144,7 +144,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "port": 8081
+            "port": 4200
           }
         },
         "extract-i18n": {

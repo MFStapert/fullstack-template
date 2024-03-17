@@ -8,5 +8,5 @@ import { TestComponent } from '@ui/test/test.component';
   template: '<ui-test>{{helloWorld}}</ui-test>',
 })
 export class AppComponent {
-  helloWorld = 'Hello site';
+  helloWorld = 'hello site';
 }
