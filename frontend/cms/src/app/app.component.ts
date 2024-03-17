@@ -5,6 +5,8 @@ import {TestComponent} from "@ui/test/test.component";
   selector: 'cms-root',
   standalone: true,
   imports: [TestComponent],
-  template: '<ui-test></ui-test>',
+  template: '<ui-test>{{helloWorld}}</ui-test>',
 })
-export class AppComponent {}
+export class AppComponent {
+  helloWorld = "Hello cms"
+}

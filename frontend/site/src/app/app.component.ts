@@ -5,7 +5,8 @@ import {TestComponent} from "@ui/test/test.component";
   selector: 'site-root',
   standalone: true,
   imports: [ TestComponent],
-  template: '<ui-test></ui-test>'
+  template: '<ui-test>{{helloWorld}}</ui-test>'
 })
 export class AppComponent {
+  helloWorld = "Hello site"
 }

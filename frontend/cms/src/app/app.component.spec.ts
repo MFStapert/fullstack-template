@@ -14,4 +14,14 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+
+    fixture.detectChanges()
+
+    const testComponent = fixture.nativeElement.querySelector('h1')
+    expect(testComponent.textContent).toContain(app.helloWorld)
+  });
 });
