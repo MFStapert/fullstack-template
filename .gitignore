@@ -5,6 +5,8 @@
 /tmp
 /out-tsc
 /bazel-out
+bin
+Debug
 
 # Node
 /node_modules
