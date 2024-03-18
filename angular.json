@@ -48,7 +48,8 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "baseHref": "/site/"
             }
           },
           "defaultConfiguration": "production"
@@ -66,7 +67,7 @@
           "defaultConfiguration": "development",
           "options": {
             "port": 4201,
-            "proxyConfig": "frontend/site/src/proxy.conf.json"
+            "host": "0.0.0.0"
           }
         },
         "extract-i18n": {
@@ -128,7 +129,8 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "baseHref": "/cms/"
             }
           },
           "defaultConfiguration": "production"
@@ -146,7 +148,7 @@
           "defaultConfiguration": "development",
           "options": {
             "port": 4200,
-            "proxyConfig": "frontend/cms/src/proxy.conf.json"
+            "host": "0.0.0.0"
           }
         },
         "extract-i18n": {
