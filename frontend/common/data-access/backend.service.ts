@@ -7,10 +7,10 @@ export class BackendService {
   http = inject(HttpClient);
 
   getCms(): Observable<string> {
-    return this.http.get('http://localhost/api/cms', { responseType: 'text' });
+    return this.http.get('/backend/cms', { responseType: 'text' });
   }
 
   getSite(): Observable<string> {
-    return this.http.get('http://localhost/api/site', { responseType: 'text' });
+    return this.http.get('/backend/site', { responseType: 'text' });
   }
 }

@@ -11,6 +11,9 @@ services:
     command: [ nginx-debug, '-g', 'daemon off;' ]
     logging:
       driver: local
+  backend:
+    image: backend:latest
+    container_name: backend
   cms:
     image: cms:latest
     container_name: cms
