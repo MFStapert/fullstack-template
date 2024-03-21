@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/site",
+            "outputPath": "frontend/dist/site",
             "index": "frontend/site/src/index.html",
             "browser": "frontend/site/src/main.ts",
             "polyfills": [
@@ -31,6 +31,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/site/",
               "budgets": [
                 {
                   "type": "initial",
@@ -94,7 +95,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/cms",
+            "outputPath": "frontend/dist/cms",
             "index": "frontend/cms/src/index.html",
             "browser": "frontend/cms/src/main.ts",
             "polyfills": [
@@ -112,6 +113,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/cms/",
               "budgets": [
                 {
                   "type": "initial",
