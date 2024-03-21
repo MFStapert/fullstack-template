@@ -1,0 +1,4 @@
+services:
+  proxy:
+    volumes:
+      - ./nginx/local/nginx.conf:/etc/nginx/templates/nginx.conf.template
