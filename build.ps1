@@ -27,12 +27,10 @@ function Down {
 }
 
 function Build {
-    npm run build cms
     cd .\frontend
     .\powershell\build-cms.ps1
     cd ..
 
-    npm run build site
     cd .\frontend
     .\powershell\build-site.ps1
     cd ..
