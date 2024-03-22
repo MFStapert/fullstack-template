@@ -6,6 +6,7 @@ tmp
 out-tsc
 bin
 Debug
+obj
 
 # Node
 node_modules
@@ -37,6 +38,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+obj
 
 # System files
 .DS_Store
