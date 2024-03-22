@@ -2,8 +2,10 @@
 # see https://github.com/prettier/prettier/issues/2294
 
 .angular
+/.nx/cache
 
 ## compiled output
+build
 dist
 tmp
 out-tsc
@@ -27,3 +29,4 @@ node_modules
 angular.json
 .angular-cli.json
 package-lock.json
+
