@@ -39,3 +39,11 @@ services:
       driver: local
     profiles:
       - full
+
+  site-e2e:
+    image: site-e2e
+    container_name: site-e2e
+    volumes:
+      - ../e2e/site-e2e/:/e2e
+    environment:
+      - baseUrl=http://proxy

@@ -26,6 +26,12 @@ function Down {
     cd ..
 }
 
+function Build-E2E {
+  cd .\e2e
+  .\powershell\build-site.ps1
+  cd ..
+}
+
 function Build {
     cd .\frontend
     .\powershell\build-cms.ps1
