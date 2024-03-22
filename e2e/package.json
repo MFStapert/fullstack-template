@@ -1,0 +1,12 @@
+{
+  "name": "e2e",
+  "scripts": {
+    "e2e:cms": "cypress open --e2e --browser electron",
+    "e2e:site": "playwright test --ui"
+  },
+  "devDependencies": {
+    "cypress": "^13.7.0",
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^20.11.30"
+  }
+}
