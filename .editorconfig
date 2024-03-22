@@ -7,8 +7,3 @@ indent_style = space
 indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
-
-[*.{ts,js,html,css}]
-max_line_length = 80
-
-# settings zijn consistent met prettier defaults
