@@ -8,7 +8,7 @@ services:
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
     ports:
       - '80:80'
-    command: [ nginx-debug, '-g', 'daemon off;' ]
+    command: [nginx-debug, '-g', 'daemon off;']
     logging:
       driver: local
 
@@ -23,7 +23,7 @@ services:
     container_name: cms
     environment:
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
-    command: [ nginx-debug, '-g', 'daemon off;' ]
+    command: [nginx-debug, '-g', 'daemon off;']
     logging:
       driver: local
     profiles:
@@ -34,7 +34,7 @@ services:
     container_name: site
     environment:
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
-    command: [ nginx-debug, '-g', 'daemon off;' ]
+    command: [nginx-debug, '-g', 'daemon off;']
     logging:
       driver: local
     profiles:

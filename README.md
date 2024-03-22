@@ -2,7 +2,7 @@
 
 ## Installing
 
-First install the required  system requirements.
+First install the required system requirements.
 
 `winget import -i .\winget-export.json --accept-package-agreements`
 
@@ -12,6 +12,6 @@ Node scripts
 
 `npx playwright install`
 
-## Runing 
+## Runing
 
 `.\build.ps1 <FUNCTION>`
