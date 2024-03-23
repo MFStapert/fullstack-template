@@ -15,8 +15,7 @@ services:
   backend:
     image: backend:latest
     container_name: backend
-    profiles:
-      - full
+    profiles: [full]
 
   cms:
     image: cms:latest
@@ -26,8 +25,7 @@ services:
     command: [nginx-debug, '-g', 'daemon off;']
     logging:
       driver: local
-    profiles:
-      - full
+    profiles: [full]
 
   site:
     image: site:latest
@@ -37,13 +35,26 @@ services:
     command: [nginx-debug, '-g', 'daemon off;']
     logging:
       driver: local
-    profiles:
-      - full
+    profiles: [full]
+
+  cms-e2e:
+    image: "cypress/included:13.7.1"
+    depends_on:
+      - cms
+    environment:
+      - CYPRESS_baseUrl=http://proxy/cms
+    working_dir: /e2e
+    volumes:
+      - ../e2e/:/e2e
+    profiles: [e2e]
 
   site-e2e:
     image: site-e2e
+    depends_on:
+      - site
     container_name: site-e2e
     volumes:
       - ../e2e/site-e2e/:/e2e
     environment:
-      - baseUrl=http://proxy
+      - baseUrl=http://proxy/site
+    profiles: [e2e]

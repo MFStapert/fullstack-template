@@ -1,1 +1,1 @@
-docker compose --profile full down --remove-orphans --volumes
+docker compose --profile full --profile e2e down --remove-orphans --volumes
