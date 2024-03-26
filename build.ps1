@@ -28,7 +28,7 @@ function Run-Infra {
 
 function Run-Backend {
   cd .\backend
-  .\powershell\backendrun.ps1
+  .\powershell\run.ps1
   cd ..
 }
 
