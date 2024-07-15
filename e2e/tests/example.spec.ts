@@ -2,7 +2,7 @@
 import { expect, test } from '@playwright/test';
 
 test('has title', async ({ page }) => {
-  await page.goto('/site/');
+  await page.goto('http://localhost');
 
-  await expect(page.getByTestId('hello-world')).toContainText('hello site');
+  await expect(page.getByTestId("frontend")).toContainText('hello cms');
 });

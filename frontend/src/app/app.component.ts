@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component,  OnInit, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {AsyncPipe} from "@angular/common";
 
@@ -6,7 +6,7 @@ import {AsyncPipe} from "@angular/common";
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, AsyncPipe],
-  template: '<div>{{helloWorld()}}</div>',
+  template: '<div data-testid="frontend">{{helloWorld()}}</div>',
 })
 export class AppComponent implements OnInit {
   helloWorld = signal('')

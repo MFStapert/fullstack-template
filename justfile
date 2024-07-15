@@ -14,3 +14,5 @@ build:
 	just frontend/build-docker
 	just backend/build
 
+e2e:
+	just e2e/e2e

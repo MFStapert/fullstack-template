@@ -1,10 +1,10 @@
-- [] justfile setup
+- [x] justfile setup
 - [] backend
   - [] nestjs
   - [] endpoint impl
-- [] frontend
+- [x] frontend
   - [] prettier + eslint config
-  - [] single project
+  - [x] single project
 - [] e2e
   - [] single project
   - [] justfile
