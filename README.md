@@ -14,4 +14,4 @@ Node scripts
 
 ## Runing
 
-`.\build.ps1 <FUNCTION>`
+`just build run-full`

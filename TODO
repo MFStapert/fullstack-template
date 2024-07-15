@@ -1,2 +1,13 @@
-path config (proj a kan niet bij b)
-database
+- [] justfile setup
+- [] backend
+  - [] nestjs
+  - [] endpoint impl
+- [] frontend
+  - [] prettier + eslint config
+  - [] single project
+- [] e2e
+  - [] single project
+  - [] justfile
+- [] database
+- [] github actions
+- [] tool versions
