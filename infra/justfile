@@ -4,5 +4,8 @@ run-infra:
 run-full:
 	docker compose --profile full up -d
 
+run-e2e:
+	docker compose --profile full --profile e2e up --wait
+
 down:
 	docker compose --profile full down --remove-orphans --volumes

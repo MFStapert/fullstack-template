@@ -1,2 +1,12 @@
-e2e:
-	npm run e2e:ci
+install:
+ npm ci
+
+clean:
+ rm -rf node_modules
+ rm -rf playwright-report
+ rm -rf test-results
+
+build-docker:
+  docker build \
+    -t e2e:latest \
+    .

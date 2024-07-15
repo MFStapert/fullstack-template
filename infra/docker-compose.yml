@@ -1,3 +1,4 @@
+
 services:
   proxy:
     image: nginx:1.25.3-alpine
@@ -11,6 +12,11 @@ services:
     command: [nginx-debug, '-g', 'daemon off;']
     logging:
       driver: local
+    healthcheck:
+      test: curl http://localhost
+      start_period: 10s
+      interval: 10s
+      retries: 3
 
   backend:
     image: backend:latest
@@ -42,24 +48,14 @@ services:
       - backend
     profiles: [full]
 
-  cms-e2e:
-    image: "cypress/included:13.7.1"
+  e2e:
+    image: e2e
     depends_on:
-      - cms
-    environment:
-      - CYPRESS_baseUrl=http://proxy/cms
-    working_dir: /e2e
+      proxy:
+        condition: service_healthy
+    container_name: e2e
     volumes:
       - ../e2e/:/e2e
-    profiles: [e2e]
-
-  site-e2e:
-    image: site-e2e
-    depends_on:
-      - site
-    container_name: site-e2e
-    volumes:
-      - ../e2e/site-e2e/:/e2e
     environment:
-      - baseUrl=http://proxy/site
+      - BASE_URL=http://proxy/
     profiles: [e2e]
