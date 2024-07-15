@@ -11,7 +11,6 @@ down:
 	just infra/down
 
 build:
-	just frontend/build-cms-docker
-	just frontend/build-site-docker
+	just frontend/build-docker
 	just backend/build
 

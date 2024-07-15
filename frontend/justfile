@@ -1,17 +1,7 @@
-build-cms:
-  npm run build cms
+build:
+  npm run build
 
-build-cms-docker: build-cms
+build-docker: build
   docker build \
-    -t cms:latest \
-    --build-arg="BUILD_FOLDER=cms" \
+    -t frontend:latest \
     .
-
-build-site:
-  npm run build site
-
-build-site-docker: build-site
-	docker build \
-		-t site:latest \
-		--build-arg="BUILD_FOLDER=site" \
-		.

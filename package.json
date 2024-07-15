@@ -1,0 +1,13 @@
+{
+  "name": "just-monorepo",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=9.5.0"
+  },
+  "dependencies": {
+    "@angular/cli": "^18.1.0"
+  }
+}

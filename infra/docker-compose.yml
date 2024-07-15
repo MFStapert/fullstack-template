@@ -30,21 +30,9 @@ services:
       SA_PASSWORD: "Change_Password"
       ACCEPT_EULA: "Y"
 
-  cms:
-    image: cms:latest
-    container_name: cms
-    environment:
-      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
-    command: [nginx-debug, '-g', 'daemon off;']
-    logging:
-      driver: local
-    depends_on:
-      - backend
-    profiles: [full]
-
-  site:
-    image: site:latest
-    container_name: site
+  frontend:
+    image: frontend:latest
+    container_name: frontend
     environment:
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
     command: [nginx-debug, '-g', 'daemon off;']

@@ -1,0 +1,6 @@
+packages:
+  - 'frontend/*'
+
+catalog:
+#  chalk: ^4.1.2
+

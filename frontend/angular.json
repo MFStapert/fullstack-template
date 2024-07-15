@@ -1,47 +1,48 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "frontend",
+  "newProjectRoot": "projects",
   "projects": {
-    "site": {
+    "project": {
       "projectType": "application",
       "schematics": {},
-      "root": "site",
-      "sourceRoot": "site/src",
-      "prefix": "site",
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/site",
-            "index": "site/src/index.html",
-            "browser": "site/src/main.ts",
+            "outputPath": "dist/",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "site/tsconfig.app.json",
+            "tsConfig": "tsconfig.app.json",
             "assets": [
-              "site/src/favicon.ico",
-              "site/src/assets"
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
             ],
             "styles": [
-              "site/src/styles.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "baseHref": "/site/",
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
                 }
               ],
               "outputHashing": "all"
@@ -49,8 +50,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "baseHref": "/site/"
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -59,125 +59,35 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "site:build:production"
+              "buildTarget": "project:build:production"
             },
             "development": {
-              "buildTarget": "site:build:development"
+              "buildTarget": "project:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {
-            "port": 4201,
-            "host": "0.0.0.0"
-          }
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "site:build"
-          }
+          "builder": "@angular-devkit/build-angular:extract-i18n"
         },
         "test": {
-          "builder": "@angular-builders/jest:run",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "configPath": "./jest.config.ts"
-          }
-        }
-      }
-    },
-    "cms": {
-      "projectType": "application",
-      "schematics": {},
-      "root": "cms",
-      "sourceRoot": "cms/src",
-      "prefix": "cms",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "outputPath": "dist/cms",
-            "index": "cms/src/index.html",
-            "browser": "cms/src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "zone.js/testing"
             ],
-            "tsConfig": "cms/tsconfig.app.json",
+            "tsConfig": "tsconfig.spec.json",
             "assets": [
-              "cms/src/favicon.ico",
-              "cms/src/assets"
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
             ],
             "styles": [
-              "cms/src/styles.css"
+              "src/styles.css"
             ],
             "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "baseHref": "/cms/",
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "baseHref": "/cms/"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "cms:build:production"
-            },
-            "development": {
-              "buildTarget": "cms:build:development"
-            }
-          },
-          "defaultConfiguration": "development",
-          "options": {
-            "port": 4200,
-            "host": "0.0.0.0"
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "cms:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "configPath": "./jest.config.ts"
-          }
-        }
-      }
-    },
-    "common": {
-      "projectType": "application",
-      "schematics": {},
-      "root": "common",
-      "sourceRoot": "common",
-      "prefix": "common",
-      "architect": {
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "configPath": "./jest.config.ts"
           }
         }
       }
