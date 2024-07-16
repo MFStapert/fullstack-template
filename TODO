@@ -1,13 +1,27 @@
-- [x] justfile setup
-- [] backend
-  - [] nestjs
-  - [] endpoint impl
-- [x] frontend
-  - [] prettier + eslint config
-  - [x] single project
 - [] e2e
-  - [] single project
-  - [] justfile
-- [] database
+ - run local
+ - run docker
+- [] prettier + eslint config
+ - pre-commit
+- [] git ignores
+- [] local
+ - pin dependencies
+ - run config
+ - run all checks from just
+ - run all tests from just
 - [] github actions
-- [] tool versions
+ - install
+ - check
+ - test
+ - build
+ - e2e
+- [] docs
+ - install instructions + project deps
+ - tech stack description
+
+ideas:
+caddy reverse proxy
+openapi + generation
+tailwind
+package.json management (pnpm/workspaces)
+deployment

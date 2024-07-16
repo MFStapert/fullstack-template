@@ -1,9 +1,0 @@
-@backend_HostAddress = http://localhost:5078
-@backend_Proxy = http://localhost/backend
-
-GET {{backend_HostAddress}}/site/
-Accept: application/json
-
-###
-GET {{backend_Proxy}}/site/
-Accept: application/json

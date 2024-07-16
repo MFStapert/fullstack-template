@@ -1,4 +1,11 @@
-build:
-	docker build \
-		-t backend \
-		.
+install:
+ npm ci
+
+clean:
+ rm -rf dist
+ rm -rf node_modules
+
+build-docker:
+  docker build \
+    -t backend:latest \
+    .
