@@ -3,6 +3,11 @@ services:
     image: backend:latest
     container_name: backend
     profiles: [ full ]
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/hello"]
+      interval: 10s
+      timeout: 1s
+      retries: 20
 
   frontend:
     image: frontend:latest
@@ -12,8 +17,6 @@ services:
     command: [nginx-debug, '-g', 'daemon off;']
     logging:
       driver: local
-    depends_on:
-      - backend
     profiles: [full]
 
   proxy:
@@ -35,8 +38,7 @@ services:
     network_mode: 'host'
     image: e2e
     depends_on:
-      - proxy
-      - frontend
-      - backend
+      backend:
+        condition: service_healthy
     container_name: e2e
     profiles: [e2e]

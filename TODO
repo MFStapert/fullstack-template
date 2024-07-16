@@ -1,5 +1,4 @@
 - [] e2e
- - run local
  - run docker
 - [] prettier + eslint config
  - pre-commit
@@ -25,3 +24,5 @@ openapi + generation
 tailwind
 package.json management (pnpm/workspaces)
 deployment
+watchtower
+docker image cleanup
