@@ -1,6 +1,6 @@
-import {Component,  OnInit, signal} from '@angular/core';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {AsyncPipe, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -8,17 +8,15 @@ import {AsyncPipe, NgIf} from "@angular/common";
   imports: [RouterOutlet, AsyncPipe, NgIf],
   template: `
     <h1>MyApp</h1>
-    <div *ngIf="helloWorld()" data-testid="frontend">{{helloWorld()}}</div>
+    <div *ngIf="helloWorld()" data-testid="frontend">{{ helloWorld() }}</div>
   `,
 })
 export class AppComponent implements OnInit {
-  helloWorld = signal('')
+  helloWorld = signal('');
 
   async ngOnInit() {
     const response = await fetch('http://localhost/api/hello');
     const json = await response.text();
-    this.helloWorld.set(json)
+    this.helloWorld.set(json);
   }
-
-
 }

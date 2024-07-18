@@ -1,0 +1,60 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "**/build/**",
+    "**/coverage/**",
+    "**/dist/**",
+    "**/generated/**",
+    "**/node_modules/**"
+  ],
+  "extends": [
+    "prettier"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+      ]
+    },
+    {
+      "files": [
+        "*.component.ts"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "warn",
+              "error"
+            ]
+          }
+        ],
+        "@angular-eslint/prefer-standalone": "error",
+        "@angular-eslint/use-lifecycle-interface": "error"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
+      "rules": {
+        "@angular-eslint/template/prefer-ngsrc": "error"
+      }
+    }
+  ]
+}
