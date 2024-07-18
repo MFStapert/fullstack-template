@@ -1,4 +1,6 @@
 {
+  "name": "tooling",
+  "version": "0.0.0",
   "scripts": {
     "format:prettier": "prettier . --write  --ignore-unknown",
     "format:eslint": "eslint --fix .",
@@ -7,9 +9,9 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@angular-eslint/eslint-plugin": "18.0.0",
-    "@angular-eslint/eslint-plugin-template": "18.0.0",
-    "@angular-eslint/template-parser": "18.0.0",
+    "@angular-eslint/eslint-plugin": "18.1.0",
+    "@angular-eslint/eslint-plugin-template": "18.1.0",
+    "@angular-eslint/template-parser": "18.1.0",
     "@typescript-eslint/eslint-plugin": "7.16.1",
     "@typescript-eslint/parser": "7.16.1",
     "eslint": "8.57.0",

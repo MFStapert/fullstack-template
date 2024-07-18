@@ -1,11 +1,13 @@
 {
+  "name": "e2e",
+  "version": "0.0.0",
   "scripts": {
     "e2e:watch": "playwright test --ui",
     "e2e:ci": "playwright test",
     "prepare": "npx playwright install"
   },
   "devDependencies": {
-    "@playwright/test": "^1.45.1",
-    "@types/node": "^20.14.10"
+    "@playwright/test": "1.45.1",
+    "@types/node": "20.14.10"
   }
 }

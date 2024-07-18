@@ -2,16 +2,16 @@
  - run docker
 - [x] prettier + eslint config
  - pre-commit
-- [] git ignores
+- [x] git ignores
+ [] package jsons
+ - backend
+ - frontend
+ - test
 - [] local
  - pin dependencies
  - run config
  - run all checks from just
  - run all tests from just
- [] package jsons
- - backend
- - frontend
- - test
 - [] github actions
  - install
  - check
