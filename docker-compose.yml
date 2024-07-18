@@ -2,9 +2,9 @@ services:
   backend:
     image: backend:latest
     container_name: backend
-    profiles: [ full ]
+    profiles: [full]
     healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:8080/hello"]
+      test: ['CMD', 'curl', '--fail', 'http://localhost:8080/hello']
       interval: 10s
       timeout: 1s
       retries: 20
@@ -32,7 +32,7 @@ services:
     logging:
       driver: local
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - 'host.docker.internal:host-gateway'
 
   e2e:
     network_mode: 'host'
