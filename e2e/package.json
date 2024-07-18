@@ -1,7 +1,8 @@
 {
   "scripts": {
     "e2e:watch": "playwright test --ui",
-    "e2e:ci": "playwright test"
+    "e2e:ci": "playwright test",
+    "prepare": "npx playwright install"
   },
   "devDependencies": {
     "@playwright/test": "^1.45.1",

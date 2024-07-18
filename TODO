@@ -1,6 +1,6 @@
-- [] e2e
+- [x] e2e
  - run docker
-- [] prettier + eslint config
+- [x] prettier + eslint config
  - pre-commit
 - [] git ignores
 - [] local
@@ -8,6 +8,10 @@
  - run config
  - run all checks from just
  - run all tests from just
+ [] package jsons
+ - backend
+ - frontend
+ - test
 - [] github actions
  - install
  - check
