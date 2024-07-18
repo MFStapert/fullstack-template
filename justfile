@@ -13,6 +13,14 @@ clean:
  just e2e/clean
  just frontend/clean
 
+format:
+ npm run format:prettier
+ npm run format:eslint
+
+check:
+  npm run check:prettier
+  npm run check:eslint
+
 build:
 	just backend/build-docker
 	just e2e/build-docker
