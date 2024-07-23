@@ -6,7 +6,7 @@ clean:
  rm -rf playwright-report
  rm -rf test-results
 
-build-docker:
+build:
   docker build \
     -t e2e:latest \
     .

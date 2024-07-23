@@ -8,8 +8,6 @@ clean:
 
 build:
   npm run build:frontend
-
-build-docker: build
   docker build \
     -t frontend:latest \
     .

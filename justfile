@@ -22,9 +22,9 @@ check:
   npm run check:eslint
 
 build:
-	just backend/build-docker
-	just e2e/build-docker
-	just frontend/build-docker
+	just backend/build
+	just e2e/build
+	just frontend/build
 
 run-infra:
 	docker compose -f docker-compose.yml -f docker-compose.local.yml up -d

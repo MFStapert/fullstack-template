@@ -1,17 +1,41 @@
-# MyWorkspace
+# Monorepo template
 
-## Installing
+Template for monorepo setup in node
 
-First install the required system requirements.
+## System requirements
 
-`winget import -i .\winget-export.json --accept-package-agreements`
+- asdf
+- docker
 
-Node scripts
+## Install dependencies
 
-`npm ci`
+- asdf plugin add nodejs
+- asdf plugin add just
+- asdf install
+- `just install`
 
-`npx playwright install`
+## Run
 
-## Runing
+`just run-infra` to run project infrastructure
 
-`just build run-full`
+`npm run start:frontend` in frontend folder for frontend
+
+`npm run start:backend` in backend folder for backend
+
+### Docker
+
+`just run-full` to run project in docker (requires build)
+
+## Build
+
+`just build` to build docker containers
+
+## Test
+
+`npm run unit:backend` in backend to unit test backend
+
+`npm run test:backend` in backend to e2e test backend
+
+## E2E
+
+`just run-e2e` to e2e project in docker (requires build)

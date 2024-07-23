@@ -1,5 +1,3 @@
-- [] local
- - run config
 - [] github actions
  - install
  - check
@@ -10,7 +8,7 @@
  - install instructions + project deps
  - tech stack description
 
-ideas:
+# ideas:
 caddy reverse proxy
 openapi + generation
 tailwind
@@ -18,3 +16,5 @@ package.json management (pnpm/workspaces)
 deployment
 watchtower
 docker image cleanup
+- builder images
+just comments
