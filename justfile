@@ -18,23 +18,28 @@ format:
  npm run format:eslint
 
 check:
-  npm run check:prettier
-  npm run check:eslint
+ npm run check:prettier
+ npm run check:eslint
 
 build:
-	just backend/build
-	just e2e/build
-	just frontend/build
+ just backend/build
+ just e2e/build
+ just frontend/build
+
+test:
+ just backend/test
+
+e2e:
+ just e2e/run
 
 run-infra:
-	docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
+ docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
 
 run-full:
-	docker compose --profile full up -d
+ docker compose --profile full up -d
 
 run-e2e:
-	docker compose --profile full --profile e2e up --wait
+ docker compose --profile full --profile e2e up --wait
 
 down:
-	docker compose --profile full down --remove-orphans --volumes
-
+ docker compose --profile full down --remove-orphans --volumes

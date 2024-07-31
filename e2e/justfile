@@ -6,7 +6,10 @@ clean:
  rm -rf playwright-report
  rm -rf test-results
 
+run:
+ npm run e2e:watch
+
 build:
-  docker build \
-    -t e2e:latest \
-    .
+ docker build \
+  -t e2e:latest \
+  .

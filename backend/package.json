@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "0.0.0",
   "scripts": {
-    "build:backend": "nest build",
-    "start:backend": "nest start --watch",
-    "test:backend": "jest"
+    "build": "nest build",
+    "start": "nest start --watch",
+    "test": "jest"
   },
   "dependencies": {
     "@nestjs/common": "10.0.0",

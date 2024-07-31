@@ -2,8 +2,8 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
-    "start:frontend": "ng serve",
-    "build:frontend": "ng build"
+    "start": "ng serve",
+    "build": "ng build"
   },
   "dependencies": {
     "@angular/animations": "18.1.0",

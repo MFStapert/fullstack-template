@@ -5,7 +5,10 @@ clean:
  rm -rf dist
  rm -rf node_modules
 
+test:
+ npm run test
+
 build:
-  docker build \
-    -t backend:latest \
-    .
+ docker build \
+   -t backend:latest \
+  .
