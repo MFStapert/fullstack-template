@@ -1,6 +1,4 @@
 - [] github actions
- - test
- - build
  - e2e
 - [] docs
  - install instructions + project deps

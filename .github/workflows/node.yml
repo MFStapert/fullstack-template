@@ -15,7 +15,7 @@ jobs:
       - name: Run eslint
         run: npm run check:eslint
 
-  backend:
+  build-backend:
     runs-on: ubuntu-latest
     needs: check
     defaults:
@@ -33,7 +33,7 @@ jobs:
       - name: Build backend
         run: npm run build
 
-  frontend:
+  build-frontend:
     runs-on: ubuntu-latest
     needs: check
     defaults:
@@ -49,10 +49,11 @@ jobs:
       - name: Build frontend
         run: npm run build
 
-  docker:
+  e2e:
     runs-on: ubuntu-latest
-    needs: [backend, frontend]
+    needs: [build-backend, build-frontend]
     steps:
+      - uses: actions/checkout@v4
       - name: check be
         run: ls backend
       - name: check fe
