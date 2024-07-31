@@ -15,7 +15,8 @@ jobs:
       - name: Run eslint
         run: npm run check:eslint
       - name: Test backend
-        run: backend/npm run check:eslint
+        run: npm run check:eslint
+        working-directory: backend
       - name: Build backend
         run: npm run build
         working-directory: backend
