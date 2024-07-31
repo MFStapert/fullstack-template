@@ -57,4 +57,5 @@ jobs:
       - uses: adambirds/docker-compose-action@v1.3.0
         with:
           compose-file: ./docker-compose.yml
-        run: docker compose --profile full --profile e2e up --wait --exit-code-from=web
+      - name: Run E2E
+        run: docker compose --profile full --profile e2e up --exit-code-from=e2e
