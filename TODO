@@ -1,5 +1,4 @@
-- [] github actions
- - e2e
+- [x] github actions
 - [] docs
  - install instructions + project deps
  - tech stack description
@@ -10,7 +9,6 @@ openapi + generation
 tailwind
 package.json management (pnpm/workspaces)
 deployment
-watchtower
+ watchtower
 docker image cleanup
-- builder images
 just comments
