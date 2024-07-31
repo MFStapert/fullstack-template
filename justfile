@@ -21,13 +21,13 @@ check:
  npm run check:prettier
  npm run check:eslint
 
+test:
+ just backend/test
+
 build:
  just backend/build
  just e2e/build
  just frontend/build
-
-test:
- just backend/test
 
 e2e:
  just e2e/run

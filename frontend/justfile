@@ -7,7 +7,6 @@ clean:
  rm -rf node_modules
 
 build:
- npm run build
  docker build \
   -t frontend:latest \
   .
