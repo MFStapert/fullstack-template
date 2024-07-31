@@ -7,8 +7,3 @@ clean:
 
 test:
  npm run test
-
-build:
- docker build \
-   -t backend:latest \
-  .

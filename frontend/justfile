@@ -5,8 +5,3 @@ clean:
  rm -rf .angular
  rm -rf dist
  rm -rf node_modules
-
-build:
- docker build \
-  -t frontend:latest \
-  .

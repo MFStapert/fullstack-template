@@ -24,14 +24,6 @@ check:
 test:
  just backend/test
 
-build:
- just backend/build
- just e2e/build
- just frontend/build
-
-e2e:
- just e2e/run
-
 run-infra:
  docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
 
