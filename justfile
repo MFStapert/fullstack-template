@@ -19,6 +19,9 @@ check:
 test:
  pnpm run -r "/^test.*/"
 
+start:
+ pnpm run -r "/^start.*/"
+
 build:
  pnpm run -r "/^build.*/"
 

@@ -9,9 +9,9 @@ Template for monorepo setup in node
 
 ## Install dependencies
 
-- `asdf plugin add nodejs`
 - `asdf plugin add just`
-- `asdf install`
+- `asdf plugin add nodejs`
+- `asdf plugin add pnpm`
 - `just install`
 
 ## Build
@@ -24,16 +24,12 @@ Template for monorepo setup in node
 
 `just run-full` to run project in docker (requires build)
 
-`npm run start` in frontend folder for frontend
-
-`npm run start` in backend folder for backend
+`just start` to start frontend and backend
 
 ## Test
 
-`npm run test` in backend to test backend
+`just test` to run all tests
 
 ## E2E
-
-`just e2e` to e2e project in watch mode
 
 `just run-e2e` to e2e project in docker (requires build)
