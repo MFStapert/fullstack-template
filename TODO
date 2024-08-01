@@ -1,14 +1,8 @@
 - [x] github actions
+- [] package.json management (pnpm/workspaces)
+- [] frontend msw +for test
+- [] docker image cleanup
 - [] docs
  - install instructions + project deps
  - tech stack description
-
-# ideas:
-caddy reverse proxy
-openapi + generation
-tailwind
-package.json management (pnpm/workspaces)
-deployment
- watchtower
-docker image cleanup
-just comments
+ - just comments

@@ -11,5 +11,4 @@ RUN npm run build
 FROM nginx:1.25.3-alpine
 
 COPY ./nginx/nginx.conf /etc/nginx/templates/default.conf.template
-RUN ls
 COPY --from=build ./app/dist/browser /usr/share/nginx/html/

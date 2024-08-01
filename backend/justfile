@@ -1,9 +1,0 @@
-install:
- npm ci
-
-clean:
- rm -rf dist
- rm -rf node_modules
-
-test:
- npm run test
