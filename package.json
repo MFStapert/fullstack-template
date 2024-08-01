@@ -2,7 +2,7 @@
   "name": "tooling",
   "version": "0.0.0",
   "scripts": {
-    "clean": "rm -rf node_mmodules && pnpm -r run clean",
+    "clean": "rm -rf node_modules && pnpm -r run clean",
     "format:prettier": "prettier . --write  --ignore-unknown",
     "format:eslint": "eslint --fix .",
     "check:prettier": "prettier . --check",

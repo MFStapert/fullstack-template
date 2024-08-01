@@ -19,19 +19,17 @@ check:
 test:
  pnpm run -r "/^test.*/"
 
-start:
- pnpm run -r "/^start.*/"
-
 build:
  pnpm run -r "/^build.*/"
 
-run-infra:
+start:
  docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
+ pnpm run -r "/^start.*/"
 
-run-full:
+docker:
  docker compose --profile full up -d
 
-run-e2e:
+e2e:
  docker compose --profile full --profile e2e up --wait
 
 down:
