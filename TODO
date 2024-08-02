@@ -1,6 +1,6 @@
 - [x] github actions
-- [] package.json management (pnpm/workspaces)
-- [] frontend msw +for test
+- [x] package.json management (pnpm/workspaces)
+- [] frontend test
 - [] docker image cleanup
 - [] docs
  - install instructions + project deps
