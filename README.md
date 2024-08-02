@@ -1,6 +1,6 @@
 # Monorepo template
 
-Template for monorepo setup in node
+Template for fullstack setup
 
 ## System requirements
 
@@ -9,31 +9,31 @@ Template for monorepo setup in node
 
 ## Install dependencies
 
-- `asdf plugin add nodejs`
 - `asdf plugin add just`
-- `asdf install`
+- `asdf plugin add nodejs`
+- `asdf plugin add pnpm`
 - `just install`
+
+## Formatting
+
+`just check` to run all static checks
+
+`just format` to format all files
 
 ## Build
 
-`just build` to build docker containers
-
-## Run
-
-`just run-infra` to run project infrastructure
-
-`just run-full` to run project in docker (requires build)
-
-`npm run start` in frontend folder for frontend
-
-`npm run start` in backend folder for backend
+`just build` to build node apps
 
 ## Test
 
-`npm run test` in backend to test backend
+`just test` to run all tests
+
+## Run
+
+`just start` to start infra containers and frontend+backend in node
+
+`just docker` to build and start all containers
 
 ## E2E
 
-`just e2e` to e2e project in watch mode
-
-`just run-e2e` to e2e project in docker (requires build)
+`just e2e` to build all containers and run e2e

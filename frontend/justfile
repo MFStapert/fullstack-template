@@ -1,7 +1,0 @@
-install:
- npm ci
-
-clean:
- rm -rf .angular
- rm -rf dist
- rm -rf node_modules

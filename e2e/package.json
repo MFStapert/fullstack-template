@@ -2,6 +2,7 @@
   "name": "e2e",
   "version": "0.0.0",
   "scripts": {
+    "clean": "rm -rf node_modules && rm -rf playwright-report && rm -rf test-results",
     "e2e:watch": "playwright test --ui",
     "e2e:ci": "playwright test",
     "prepare": "npx playwright install"

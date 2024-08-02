@@ -1,7 +1,0 @@
-install:
- npm ci
-
-clean:
- rm -rf node_modules
- rm -rf playwright-report
- rm -rf test-results

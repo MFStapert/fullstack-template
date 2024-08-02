@@ -2,36 +2,38 @@ default:
   just --list
 
 install:
- npm ci
- just backend/install
- just e2e/install
- just frontend/install
+ asdf install
+ pnpm install
 
 clean:
- rm -rf node_modules
- just backend/clean
- just e2e/clean
- just frontend/clean
+ pnpm run clean
+ docker system prune -a -f
+ docker image prune -a -f
 
 format:
- npm run format:prettier
- npm run format:eslint
+ pnpm run "/^format:.*/"
 
 check:
- npm run check:prettier
- npm run check:eslint
+ pnpm run "/^check:.*/"
 
 test:
- just backend/test
+ pnpm run -r test
 
-run-infra:
+build:
+ pnpm run -r build
+
+start:
  docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
+ pnpm run -r "/^start.*/"
 
-run-full:
- docker compose --profile full up -d
+playwright:
+ pnpm --filter=e2e run e2e:watch
 
-run-e2e:
- docker compose --profile full --profile e2e up --wait
+docker:
+ docker compose --profile full up -d --build
+
+e2e:
+ docker compose --profile full --profile e2e up --build --wait
 
 down:
  docker compose --profile full down --remove-orphans --volumes
