@@ -17,20 +17,23 @@ check:
  pnpm run "/^check:.*/"
 
 test:
- pnpm run -r "/^test.*/"
+ pnpm run -r test
 
 build:
- pnpm run -r "/^build.*/"
+ pnpm run -r build
 
 start:
  docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
  pnpm run -r "/^start.*/"
 
+playwright:
+ pnpm --filter=e2e run e2e:watch
+
 docker:
- docker compose --profile full up -d
+ docker compose --profile full up -d --build
 
 e2e:
- docker compose --profile full --profile e2e up --wait
+ docker compose --profile full --profile e2e up --build --wait
 
 down:
  docker compose --profile full down --remove-orphans --volumes

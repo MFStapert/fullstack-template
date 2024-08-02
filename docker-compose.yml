@@ -2,7 +2,8 @@ services:
   backend:
     image: backend
     build:
-      context: backend
+      context: .
+      target: backend
     container_name: backend
     profiles: [full]
     healthcheck:
@@ -14,7 +15,8 @@ services:
   frontend:
     image: frontend
     build:
-      context: frontend
+      context: .
+      target: frontend
     container_name: frontend
     environment:
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
@@ -41,7 +43,8 @@ services:
   e2e:
     image: e2e
     build:
-      context: e2e
+      context: .
+      target: e2e
     container_name: e2e
     depends_on:
       backend:
