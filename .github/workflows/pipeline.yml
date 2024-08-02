@@ -20,8 +20,8 @@ jobs:
     needs: [check]
     steps:
       - uses: actions/checkout@v4
-      - uses: adambirds/docker-compose-action@v2.0.1
+      - uses: hoverkraft-tech/compose-action@v2.0.1
         with:
-          compose-file: ./docker-compose.yml
+          compose-file: './docker/docker-compose.yml'
       - name: Run E2E
         run: docker compose --profile full --profile e2e up --exit-code-from=e2e
