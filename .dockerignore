@@ -2,6 +2,8 @@
 .gitignore
 *.md
 
-**/node_modules
-.angular
-dist/
+**/node_modules/**
+**/.angular/**
+**/dist/**
+**/test-results/**
+**/playwright-report/**

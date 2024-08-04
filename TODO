@@ -2,8 +2,6 @@
 - [x] package.json management (pnpm/workspaces)
 - [x] frontend test
 - [] docker image cleanup
- - ignore file
- - compose file
  - better caching
 - [] package.json cleanup
  - pin jest
