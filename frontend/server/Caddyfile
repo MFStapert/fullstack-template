@@ -1,0 +1,9 @@
+:80 {
+    log
+
+    root * /srv
+    file_server
+
+    # Always serve index.html for all requests
+    try_files {path} /index.html
+}

@@ -1,8 +1,19 @@
 - [x] github actions
 - [x] package.json management (pnpm/workspaces)
-- [] frontend test
+- [x] frontend test
 - [] docker image cleanup
+ - better caching
+- [] package.json cleanup
+ - pin jest
+ - pin typescript
+ - ts-node
+ - rm rxjs nest
+- [] jest config cleanup
+ - copy work
+- [] pipeline
+- 'on rules'
 - [] docs
  - install instructions + project deps
  - tech stack description
  - just comments
+ - readmes

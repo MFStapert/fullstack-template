@@ -24,7 +24,7 @@
     "prettier-plugin-organize-imports": "4.0.0"
   },
   "lint-staged": {
-    "**/*.{css,html,json,md,js,ts,yaml}": "prettier --write --ignore-unknown",
+    "**/*.{css,html,json,md,js,ts,yml,yaml}": "prettier --write --ignore-unknown",
     "**/*.{js,ts,html}": "eslint --fix"
   }
 }

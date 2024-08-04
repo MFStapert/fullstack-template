@@ -1,42 +1,58 @@
-FROM node:22.4.0-slim AS base
+FROM node:22-alpine AS cache
+
+# pnpm setup
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-FROM base AS build
-
-COPY . /usr/src/app
-WORKDIR /usr/src/app
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --ignore-scripts
-RUN pnpm run -r build
-RUN pnpm deploy --filter=backend --prod /prod/backend
-RUN pnpm deploy --filter=frontend --prod /prod/frontend
-
-FROM base AS backend
-
-RUN apt-get update && apt-get install curl -y
-
-COPY --from=build /prod/backend ./app
 WORKDIR /app
 
-EXPOSE 8080
+COPY backend/package.json /app/backend/
+COPY e2e/package.json /app/e2e/
+COPY frontend/package.json /app/frontend/
+COPY package.json /app
+COPY pnpm-*.yaml /app
 
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --ignore-scripts
+
+FROM cache AS backend-build
+
+COPY backend/ /app/backend
+RUN pnpm run --filter=backend build
+RUN pnpm deploy --filter=backend --prod /prod/backend
+
+FROM node:22-alpine AS backend
+
+# Required for healthcheck
+RUN apk --no-cache add curl
+
+WORKDIR /app
+COPY --chown=node:node --from=backend-build /prod/backend/dist dist
+COPY --chown=node:node --from=backend-build /prod/backend/node_modules node_modules
+
+USER node
 CMD [ "node", "dist/main" ]
 
-FROM nginx:1.25.3-alpine AS frontend
+FROM cache AS frontend-build
 
-COPY ./frontend/nginx/nginx.conf /etc/nginx/templates/default.conf.template
-COPY --from=build /prod/frontend/dist/browser /usr/share/nginx/html/
+COPY frontend/ /app/frontend
+RUN pnpm run --filter=frontend build
+RUN pnpm deploy --filter=frontend --prod /prod/frontend
 
-FROM mcr.microsoft.com/playwright:v1.45.1-jammy as e2e
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+FROM caddy:2-alpine AS frontend
+
+COPY frontend/server/Caddyfile /etc/caddy/Caddyfile
+COPY --from=frontend-build /prod/frontend/dist/browser /srv/
+
+FROM mcr.microsoft.com/playwright:v1.45.1-jammy AS e2e
+
+WORKDIR /app
+
+COPY package.json .
+COPY --from=cache /app/node_modules /app/node_modules
+
+COPY /e2e /app/e2e
+COPY --from=cache /app/e2e/node_modules /app/e2e/node_modules
+
 RUN corepack enable
-
-# Install dependencies
-COPY . /usr/src/app
-WORKDIR /usr/src/app
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-
-# Set the entry point for the container
 CMD ["pnpm", "--filter=e2e", "run", "e2e:ci"]

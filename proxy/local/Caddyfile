@@ -1,0 +1,11 @@
+http://localhost {
+    log
+
+    handle_path /api/* {
+        reverse_proxy http://host.docker.internal:8080
+    }
+
+    handle {
+        reverse_proxy http://host.docker.internal:4200
+    }
+}
