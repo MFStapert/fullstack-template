@@ -34,10 +34,10 @@ USER node
 
 CMD [ "node", "dist/main" ]
 
-FROM nginx:1.25.3-alpine AS frontend
+FROM caddy:2-alpine AS frontend
 
-COPY ./frontend/nginx/nginx.conf /etc/nginx/templates/default.conf.template
-COPY --from=build /prod/frontend/dist/browser /usr/share/nginx/html/
+COPY frontend/server/Caddyfile /etc/caddy/Caddyfile
+COPY --from=build /prod/frontend/dist/browser /srv/
 
 FROM mcr.microsoft.com/playwright:v1.45.1-jammy AS e2e
 
