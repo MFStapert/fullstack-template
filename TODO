@@ -1,7 +1,7 @@
 - [x] github actions
 - [x] package.json management (pnpm/workspaces)
 - [x] frontend test
-- [] docker image cleanup
+- [x] docker image cleanup
  - better caching
 - [] package.json cleanup
  - pin jest
