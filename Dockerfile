@@ -1,48 +1,58 @@
-FROM node:22-alpine AS base
+FROM node:22-alpine AS cache
 
 # pnpm setup
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-# Required for healthcheck
-RUN apk --no-cache add curl
-
 WORKDIR /app
 
-FROM base AS build
-
-COPY backend/ /app/backend
-COPY e2e/ /app/e2e
-COPY frontend/ /app/frontend
+COPY backend/package.json /app/backend/
+COPY e2e/package.json /app/e2e/
+COPY frontend/package.json /app/frontend/
 COPY package.json /app
 COPY pnpm-*.yaml /app
 
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --ignore-scripts
 
+FROM cache AS backend-build
+
+COPY backend/ /app/backend
 RUN pnpm run --filter=backend build
 RUN pnpm deploy --filter=backend --prod /prod/backend
 
+FROM node:22-alpine AS backend
+
+# Required for healthcheck
+RUN apk --no-cache add curl
+
+WORKDIR /app
+COPY --chown=node:node --from=backend-build /prod/backend/dist dist
+COPY --chown=node:node --from=backend-build /prod/backend/node_modules node_modules
+
+USER node
+CMD [ "node", "dist/main" ]
+
+FROM cache AS frontend-build
+
+COPY frontend/ /app/frontend
 RUN pnpm run --filter=frontend build
 RUN pnpm deploy --filter=frontend --prod /prod/frontend
-
-FROM base AS backend
-
-COPY --chown=node:node --from=build /prod/backend/dist dist
-COPY --chown=node:node --from=build /prod/backend/node_modules node_modules
-USER node
-
-CMD [ "node", "dist/main" ]
 
 FROM caddy:2-alpine AS frontend
 
 COPY frontend/server/Caddyfile /etc/caddy/Caddyfile
-COPY --from=build /prod/frontend/dist/browser /srv/
+COPY --from=frontend-build /prod/frontend/dist/browser /srv/
 
 FROM mcr.microsoft.com/playwright:v1.45.1-jammy AS e2e
 
-WORKDIR e2e
-COPY e2e /e2e
-RUN npm i
+WORKDIR /app
 
-CMD ["npm", "run", "e2e:ci"]
+COPY package.json .
+COPY --from=cache /app/node_modules /app/node_modules
+
+COPY /e2e /app/e2e
+COPY --from=cache /app/e2e/node_modules /app/e2e/node_modules
+
+RUN corepack enable
+CMD ["pnpm", "--filter=e2e", "run", "e2e:ci"]
