@@ -14,6 +14,8 @@ jobs:
         run: pnpm run "/^check:.*/"
       - name: Run tests
         run: pnpm run -r "/^test.*/"
+      - name: Build apps
+        run: pnpm run -r "/^build.*/"
 
   e2e:
     runs-on: ubuntu-latest
