@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   helloWorld = signal('');
 
   async ngOnInit() {
-    const response = await fetch('http://localhost/api/hello');
+    const response = await fetch('/api/hello');
     const json = await response.text();
     this.helloWorld.set(json);
   }

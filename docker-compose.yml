@@ -21,19 +21,13 @@ services:
     profiles: [full]
 
   proxy:
-    image: nginx:1.25.3-alpine
-    container_name: proxy
-    volumes:
-      - ./proxy/docker/nginx.conf:/etc/nginx/templates/nginx.conf.template
-    environment:
-      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
+    image: caddy:2-alpine
     ports:
-      - '80:80'
-    command: [nginx-debug, '-g', 'daemon off;']
-    logging:
-      driver: local
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./proxy/docker/Caddyfile:/etc/caddy/Caddyfile
 
   e2e:
     image: e2e
