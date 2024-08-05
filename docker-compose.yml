@@ -28,7 +28,7 @@ services:
       - '443:443'
       - '443:443/udp'
     volumes:
-      - ./proxy/docker/Caddyfile:/etc/caddy/Caddyfile
+      - ./proxy/docker.Caddyfile:/etc/caddy/Caddyfile
 
   e2e:
     image: e2e

@@ -1,6 +1,6 @@
 services:
   proxy:
     volumes:
-      - ./proxy/local/Caddyfile:/etc/caddy/Caddyfile
+      - ./proxy/local.Caddyfile:/etc/caddy/Caddyfile
     extra_hosts:
       - 'host.docker.internal:host-gateway'
