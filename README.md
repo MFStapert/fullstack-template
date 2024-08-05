@@ -1,6 +1,6 @@
 # Monorepo template
 
-Template for fullstack setup, includes a:
+Template for fullstack setup, includes:
 
 - backend (nestjs)
 - frontend (angular)
@@ -20,6 +20,7 @@ To view all available commands, run `just`.
 - `asdf plugin add just`
 - `asdf plugin add nodejs`
 - `asdf plugin add pnpm`
+- `asdf install`
 - `just install`
 
 ## Run
