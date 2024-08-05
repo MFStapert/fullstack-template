@@ -2,14 +2,8 @@
 - [x] package.json management (pnpm/workspaces)
 - [x] frontend test
 - [x] docker image cleanup
- - better caching
-- [] package.json cleanup
- - pin jest
- - pin typescript
- - ts-node
- - rm rxjs nest
-- [] jest config cleanup
- - copy work
+- [x] package.json cleanup
+- [x] jest config cleanup
 - [] pipeline
 - 'on rules'
 - [] docs
