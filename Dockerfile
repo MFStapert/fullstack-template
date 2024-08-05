@@ -2,10 +2,12 @@ ARG NODE_VERSION=node:22-alpine
 
 FROM ${NODE_VERSION} AS cache
 
+# setup pnpm
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
+# copy package.json files and pnpm config, then install dependencies with pnpm using cache
 WORKDIR /app
 COPY backend/package.json /app/backend/
 COPY e2e/package.json /app/e2e/
@@ -22,14 +24,15 @@ RUN pnpm deploy --filter=backend --prod /prod/backend
 
 FROM ${NODE_VERSION} AS backend
 
-# Required for healthcheck
+# required for healthcheck
 RUN apk --no-cache add curl
 
+# add files as non-privileged user
 WORKDIR /app
 COPY --chown=node:node --from=backend-build /prod/backend/dist dist
 COPY --chown=node:node --from=backend-build /prod/backend/node_modules node_modules
-
 USER node
+
 CMD [ "node", "dist/main" ]
 
 FROM cache AS frontend-build
@@ -46,7 +49,6 @@ COPY --from=frontend-build /prod/frontend/dist/browser /srv/
 FROM mcr.microsoft.com/playwright:v1.45.1-jammy AS e2e
 
 RUN corepack enable
-
 WORKDIR /app
 COPY package.json .
 COPY --from=cache /app/node_modules /app/node_modules
