@@ -1,6 +1,7 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { DefaultApiFactory } from '@generated/api';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,11 @@ import { RouterOutlet } from '@angular/router';
   `,
 })
 export class AppComponent implements OnInit {
+  api = DefaultApiFactory();
   helloWorld = signal('');
 
   async ngOnInit() {
-    const response = await fetch('/api/hello');
-    const json = await response.text();
-    this.helloWorld.set(json);
+    const response = await this.api.getHello();
+    this.helloWorld.set(response.data);
   }
 }

@@ -26,4 +26,4 @@ jobs:
         with:
           compose-file: ./docker-compose.yml
       - name: Run E2E
-        run: docker compose --profile full --profile e2e up --exit-code-from=e2e
+        run: docker compose --profile full --profile e2e up --attach e2e --exit-code-from=e2e

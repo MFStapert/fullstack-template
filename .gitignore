@@ -8,6 +8,7 @@
 # Compiled output
 build
 dist
+generated
 tmp
 out-tsc
 bin

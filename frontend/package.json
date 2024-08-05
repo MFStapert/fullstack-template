@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "clean": "rm -rf .angular && rm -rf dist && rm -rf node_modules",
+    "generate": "rm -rf generated && openapi-generator-cli generate",
+    "prestart": "npm run generate",
     "start": "ng serve",
+    "prebuild": "npm run generate",
     "build": "ng build",
     "test": "jest"
   },
@@ -16,6 +19,8 @@
     "@angular/platform-browser": "18.1.0",
     "@angular/platform-browser-dynamic": "18.1.0",
     "@angular/router": "18.1.0",
+    "@openapitools/openapi-generator-cli": "2.13.4",
+    "axios": "1.7.3",
     "rxjs": "7.8.0",
     "tslib": "2.3.0",
     "zone.js": "0.14.3"
