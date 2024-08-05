@@ -8,9 +8,10 @@ services:
     profiles: [full]
     healthcheck:
       test: ['CMD', 'curl', '--fail', 'http://localhost:8080/hello']
-      interval: 5s
+      interval: 2s
       timeout: 1s
       retries: 20
+      start_period: 5s
 
   frontend:
     image: frontend
