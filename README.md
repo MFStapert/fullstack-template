@@ -1,39 +1,37 @@
 # Monorepo template
 
-Template for fullstack setup
+Template for fullstack setup, includes a:
+
+- backend (nestjs)
+- frontend (angular)
+- reverse proxy (caddy)
+
+The project can be managed with single commands using `just`.
+
+To view all available commands, run `just`.
 
 ## System requirements
 
-- asdf
-- docker
+- [asdf](https://asdf-vm.com/)
+- [docker](https://www.docker.com/get-started/)
 
-## Install dependencies
+## Installation
 
 - `asdf plugin add just`
 - `asdf plugin add nodejs`
 - `asdf plugin add pnpm`
 - `just install`
 
-## Formatting
-
-`just check` to run all static checks
-
-`just format` to format all files
-
-## Build
-
-`just build` to build node apps
-
-## Test
-
-`just test` to run all tests
-
 ## Run
 
-`just start` to start infra containers and frontend+backend in node
+- Start Development Environment:
 
-`just docker` to build and start all containers
+`just start`
 
-## E2E
+This command starts the infrastructure containers, as well as the frontend and backend in node.
 
-`just e2e` to build all containers and run e2e
+- Build and Start All Containers:
+
+`just docker`
+
+This command builds and starts all containers, including the frontend, backend, and reverse proxy.
