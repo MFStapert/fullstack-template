@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "clean": "rm -rf .angular && rm -rf dist && rm -rf node_modules",
+    "generate": "prisma generate",
     "start": "nest start --watch",
+    "prebuild": "npm run generate",
     "build": "nest build",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "npm run generate",
+    "database:reset": "prisma migrate reset -f"
   },
   "dependencies": {
     "@nestjs/common": "10.0.0",
@@ -13,6 +17,8 @@
     "@nestjs/core": "10.0.0",
     "@nestjs/platform-express": "10.0.0",
     "@nestjs/swagger": "7.4.0",
+    "@prisma/client": "5.17.0",
+    "prisma": "5.17.0",
     "reflect-metadata": "0.1.12"
   },
   "devDependencies": {
@@ -31,5 +37,8 @@
     "ts-node": "10.9.1",
     "tsconfig-paths": "4.2.0",
     "typescript": "catalog:"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }

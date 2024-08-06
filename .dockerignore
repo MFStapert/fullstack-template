@@ -2,6 +2,8 @@
 .gitignore
 *.md
 
+*.db
+
 **/node_modules/**
 **/.angular/**
 **/dist/**

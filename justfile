@@ -10,8 +10,6 @@ install:
 # Clean up the project and docker system
 clean:
  pnpm run clean
- docker system prune -a -f
- docker image prune -a -f
 
 # Format the codebase with prettier and eslint
 format:

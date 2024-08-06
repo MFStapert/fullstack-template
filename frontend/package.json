@@ -2,13 +2,13 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
-    "clean": "rm -rf .angular && rm -rf dist && rm -rf node_modules",
+    "clean": "rm -rf .angular && rm -rf generated rm -rf dist && rm -rf node_modules",
     "generate": "rm -rf generated && openapi-generator-cli generate",
-    "prestart": "npm run generate",
     "start": "ng serve",
     "prebuild": "npm run generate",
     "build": "ng build",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "npm run generate"
   },
   "dependencies": {
     "@angular/animations": "18.1.0",
