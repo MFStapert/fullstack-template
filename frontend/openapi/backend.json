@@ -12,10 +12,141 @@
           }
         }
       }
+    },
+    "/post/{id}": {
+      "get": {
+        "operationId": "BlogController_getPostById",
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "BlogController_deletePost",
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
+            }
+          }
+        }
+      }
+    },
+    "/feed": {
+      "get": {
+        "operationId": "BlogController_getPublishedPosts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/PostDto" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/filtered-posts/{searchString}": {
+      "get": {
+        "operationId": "BlogController_getFilteredPosts",
+        "parameters": [
+          { "name": "searchString", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/PostDto" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/post": {
+      "post": {
+        "operationId": "BlogController_createDraft",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "operationId": "BlogController_signupUser",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/UserDto" } }
+            }
+          }
+        }
+      }
+    },
+    "/publish/{id}": {
+      "put": {
+        "operationId": "BlogController_publishPost",
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
+            }
+          }
+        }
+      }
     }
   },
   "info": { "title": "Backend API", "description": "", "version": "1.0", "contact": {} },
   "tags": [],
-  "servers": [{ "url": "localhost/api" }],
-  "components": { "schemas": {} }
+  "servers": [{ "url": "http://localhost/api" }],
+  "components": {
+    "schemas": {
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "email": { "type": "string" },
+          "name": { "type": "string" }
+        },
+        "required": ["id", "email", "name"]
+      },
+      "PostDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "published": { "type": "boolean" },
+          "author": { "$ref": "#/components/schemas/UserDto" }
+        },
+        "required": ["id", "title"]
+      }
+    }
+  }
 }

@@ -12,7 +12,6 @@
         "additionalProperties": {
           "supportsES6": true,
           "useSingleRequestParameter": true,
-          "withInterfaces": true,
           "withSeparateModelsAndApi": true,
           "apiPackage": "api",
           "modelPackage": "models"
