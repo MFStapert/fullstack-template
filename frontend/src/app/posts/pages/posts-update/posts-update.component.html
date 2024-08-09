@@ -1,0 +1,6 @@
+<h2>Update</h2>
+<form [formGroup]="postsForm" (ngSubmit)="submitForm()">
+  <app-posts-form [postForm]="postsForm"></app-posts-form>
+  <br />
+  <button type="submit">Submit</button>
+</form>

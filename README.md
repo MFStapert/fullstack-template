@@ -5,6 +5,7 @@ Template for fullstack setup, includes:
 - backend (nestjs)
 - frontend (angular)
 - reverse proxy (caddy)
+- e2e (playwright)
 
 The project can be managed with single commands using `just`.
 

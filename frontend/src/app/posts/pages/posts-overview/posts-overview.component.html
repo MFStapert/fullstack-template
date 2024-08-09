@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>title</th>
+      <th>published</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (post of posts(); track post) {
+      <tr>
+        <td>
+          <a [routerLink]="post.id.toString()">{{ post.id }}</a>
+        </td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.published }}</td>
+        <td>
+          <button [routerLink]="post.id.toString() + '/update'">update</button>
+          <button (click)="deletePost(post.id)">delete</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+<button routerLink="create">Create</button>
