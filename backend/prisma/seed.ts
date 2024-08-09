@@ -8,13 +8,27 @@ async function main() {
 
   console.log('Seeding...');
 
-  const post = await prisma.post.create({
-    data: {
-      id: 1,
-      title: 'Post',
-      content: 'lorem ipsum',
-      published: true,
-    },
+  const post = await prisma.post.createMany({
+    data: [
+      {
+        id: 1,
+        title: 'Post',
+        content: 'lorem ipsum',
+        published: true,
+      },
+      {
+        id: 2,
+        title: 'Paper',
+        content: 'solor dolem',
+        published: true,
+      },
+      {
+        id: 3,
+        title: 'Blog',
+        content: 'een woord',
+        published: true,
+      },
+    ],
   });
 
   console.log({ post });
