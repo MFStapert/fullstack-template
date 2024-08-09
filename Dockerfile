@@ -25,7 +25,9 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 # build
 COPY backend/ /app/backend
 RUN pnpm run --filter=backend build
+RUN pnpm run --filter=backend database:reset
 RUN pnpm deploy --filter=backend --prod /prod/backend
+
 COPY frontend/ /app/frontend
 RUN pnpm run --filter=frontend build
 RUN pnpm deploy --filter=frontend --prod /prod/frontend
@@ -39,6 +41,7 @@ RUN apk --no-cache add curl
 WORKDIR /app
 COPY --chown=node:node --from=build /prod/backend/dist dist
 COPY --chown=node:node --from=build /prod/backend/node_modules node_modules
+COPY --chown=node:node --from=build /app/backend/prisma/dev.db prisma/dev.db
 USER node
 
 CMD [ "node", "dist/main" ]

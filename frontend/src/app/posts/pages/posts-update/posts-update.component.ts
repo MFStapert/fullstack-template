@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultApiFactory } from '@generated/api/default-api';
 import { PostsFormComponent } from '../../components/posts-form/posts-form.component';
 
@@ -17,6 +18,8 @@ import { PostsFormComponent } from '../../components/posts-form/posts-form.compo
 export class PostsUpdateComponent implements OnInit {
   postId = input.required<string>();
   api = DefaultApiFactory();
+  router = inject(Router);
+  activatedRoute = inject(ActivatedRoute);
 
   postsForm = inject(NonNullableFormBuilder).group({
     title: ['', [Validators.required]],
@@ -43,5 +46,6 @@ export class PostsUpdateComponent implements OnInit {
         ...post,
       },
     });
+    this.router.navigate(['..'], { relativeTo: this.activatedRoute });
   }
 }

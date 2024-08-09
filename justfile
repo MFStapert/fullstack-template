@@ -42,7 +42,7 @@ docker:
 
 # Start the full environment and run e2e tests
 e2e:
- docker compose --profile full --profile e2e up --attach e2e --exit-code-from=e2e
+ docker compose --profile full --profile e2e up --build --attach e2e --exit-code-from=e2e
 
 # Shut down docker containers and clean up
 down:
