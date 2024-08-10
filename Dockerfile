@@ -7,13 +7,13 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-# setup java for generator
+# install java for frontend client generator
 RUN  apk update \
   && apk upgrade \
   && apk add --update openjdk11 tzdata curl unzip bash \
   && rm -rf /var/cache/apk/*
 
-# copy package.json files and pnpm config, then install dependencies with pnpm using cache
+# copy package.json files and pnpm config
 WORKDIR /app
 COPY backend/package.json /app/backend/
 COPY e2e/package.json /app/e2e/
@@ -22,7 +22,9 @@ COPY package.json /app
 COPY pnpm-*.yaml /app
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --ignore-scripts
 
+# build
 COPY backend/ /app/backend
+RUN DATABASE_URL=file:./dev.db pnpm run --filter=backend database:reset
 RUN pnpm run --filter=backend build
 RUN pnpm deploy --filter=backend --prod /prod/backend
 
@@ -39,6 +41,7 @@ RUN apk --no-cache add curl
 WORKDIR /app
 COPY --chown=node:node --from=build /prod/backend/dist dist
 COPY --chown=node:node --from=build /prod/backend/node_modules node_modules
+COPY --chown=node:node --from=build /app/backend/prisma/dev.db prisma/dev.db
 USER node
 
 CMD [ "node", "dist/main" ]

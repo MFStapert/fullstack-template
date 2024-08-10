@@ -12,10 +12,112 @@
           }
         }
       }
+    },
+    "/posts/{id}": {
+      "get": {
+        "operationId": "PostsController_getPostById",
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "PostsController_updatePost",
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PostsController_deletePost",
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
+            }
+          }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "operationId": "PostsController_getPosts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/PostDto" } }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "PostsController_createPost",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/CreatePostDto" } }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
+            }
+          }
+        }
+      }
     }
   },
   "info": { "title": "Backend API", "description": "", "version": "1.0", "contact": {} },
   "tags": [],
-  "servers": [{ "url": "localhost/api" }],
-  "components": { "schemas": {} }
+  "servers": [{ "url": "http://localhost/api" }],
+  "components": {
+    "schemas": {
+      "PostDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "published": { "type": "boolean" }
+        },
+        "required": ["id", "title"]
+      },
+      "CreatePostDto": {
+        "type": "object",
+        "properties": { "title": { "type": "string" }, "content": { "type": "string" } },
+        "required": ["title"]
+      }
+    }
+  }
 }

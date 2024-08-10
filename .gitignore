@@ -51,6 +51,7 @@ logs
 coverage
 testem.log
 typings
+*.db
 
 # System files
 .DS_Store

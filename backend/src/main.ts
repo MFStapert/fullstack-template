@@ -9,17 +9,20 @@ function setupSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
     .setTitle('Backend API')
     .setVersion('1.0')
-    .addServer('localhost/api')
+    .addServer('http://localhost/api')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  fs.writeFileSync('../frontend/openapi/backend.json', JSON.stringify(document), {});
+
+  // Write openapi spec to frontend folder, so we can use it for code generation
+  if (process.env.NODE_ENV === 'LOCAL') {
+    fs.writeFileSync('../frontend/openapi/backend.json', JSON.stringify(document), {});
+  }
+  SwaggerModule.setup('swagger', app, document);
 }
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  if (process.env.NODE_ENV === 'local') {
-    setupSwagger(app);
-  }
+  setupSwagger(app);
   await app.listen(8080);
 }
 bootstrap();

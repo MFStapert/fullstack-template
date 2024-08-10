@@ -1,0 +1,28 @@
+<table data-testid="posts">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>title</th>
+      <th>published</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (post of posts(); track post) {
+      <tr [attr.data-testid]="'post-' + post.id">
+        <td>
+          <a [routerLink]="post.id.toString()">{{ post.id }}</a>
+        </td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.published }}</td>
+        <td>
+          <button [routerLink]="post.id.toString() + '/update'" data-testid="post-update">
+            update
+          </button>
+          <button (click)="deletePost(post.id)" data-testid="post-delete">delete</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+<button data-testid="post-create" routerLink="create">Create</button>

@@ -6,6 +6,8 @@ services:
       target: backend
     container_name: backend
     profiles: [full]
+    environment:
+      DATABASE_URL: 'file:./dev.db'
     healthcheck:
       test: ['CMD', 'curl', '--fail', 'http://localhost:8080/hello']
       interval: 2s
