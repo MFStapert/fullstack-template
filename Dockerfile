@@ -24,8 +24,8 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 # build
 COPY backend/ /app/backend
+RUN DATABASE_URL=file:./dev.db pnpm run --filter=backend database:reset
 RUN pnpm run --filter=backend build
-RUN pnpm run --filter=backend database:reset
 RUN pnpm deploy --filter=backend --prod /prod/backend
 
 COPY frontend/ /app/frontend
