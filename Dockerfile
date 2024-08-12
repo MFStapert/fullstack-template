@@ -24,10 +24,8 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 # build
 COPY backend/ /app/backend
-RUN DATABASE_URL=file:./dev.db pnpm run --filter=backend database:reset
 RUN pnpm run --filter=backend build
 RUN pnpm deploy --filter=backend --prod /prod/backend
-
 COPY frontend/ /app/frontend
 RUN pnpm run --filter=frontend build
 RUN pnpm deploy --filter=frontend --prod /prod/frontend
@@ -36,12 +34,13 @@ FROM ${NODE_VERSION} AS backend
 
 # required for healthcheck
 RUN apk --no-cache add curl
+HEALTHCHECK --interval=5s --timeout=1s --retries=10 \
+ CMD curl --fail http://127.0.0.1:8080/healthcheck || exit 1
 
 # add files as non-privileged user
 WORKDIR /app
 COPY --chown=node:node --from=build /prod/backend/dist dist
 COPY --chown=node:node --from=build /prod/backend/node_modules node_modules
-COPY --chown=node:node --from=build /app/backend/prisma/dev.db prisma/dev.db
 USER node
 
 CMD [ "node", "dist/main" ]
