@@ -14,7 +14,7 @@ export class PostsDetailComponent implements OnInit {
   post = signal<PostDto | null>(null);
 
   async ngOnInit() {
-    const post = await this.api.getPostById({ id: this.postId() });
+    const post = await this.api.getPostById({ id: Number(this.postId()) });
     this.post.set(post.data);
   }
 }
