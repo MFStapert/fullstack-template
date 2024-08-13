@@ -31,6 +31,10 @@ build:
 infra:
  docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
 
+# Start the front and backend
+start:
+ pnpm run -r "/^start.*/"
+
 # Run Playwright end-to-end tests in watch mode
 playwright:
  pnpm --filter=e2e run e2e:watch
