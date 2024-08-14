@@ -21,16 +21,16 @@ export class PostsService {
 
   async createPost(data: CreatePostDto) {
     const newPost = await this.db.insert(posts).values(data).returning();
-    return newPost[0];
+    return newPost.pop();
   }
 
   async updatePost(id: number, data: PostDto) {
     const updatedPost = await this.db.update(posts).set(data).where(eq(posts.id, id)).returning();
-    return updatedPost[0];
+    return updatedPost.pop();
   }
 
   async deletePost(id: number) {
     const deletedPost = await this.db.delete(posts).where(eq(posts.id, id)).returning();
-    return deletedPost[0];
+    return deletedPost.pop();
   }
 }
