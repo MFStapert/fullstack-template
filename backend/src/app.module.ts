@@ -4,7 +4,7 @@ import { AppController } from './app.controller';
 import { PostsModule } from './posts/posts.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), PostsModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), PostsModule],
   controllers: [AppController],
 })
 export class AppModule {}

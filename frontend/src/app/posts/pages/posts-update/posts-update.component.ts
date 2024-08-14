@@ -27,7 +27,7 @@ export class PostsUpdateComponent implements OnInit {
   });
 
   async ngOnInit() {
-    const post = await this.api.getPostById({ id: this.postId() });
+    const post = await this.api.getPostById({ id: Number(this.postId()) });
     this.postsForm.setValue({
       title: post.data.title,
       content: post.data.content ?? '',
@@ -41,7 +41,7 @@ export class PostsUpdateComponent implements OnInit {
       content: this.postsForm.controls.content.value,
     };
     await this.api.updatePost({
-      id: this.postId(),
+      id: Number(this.postId()),
       postDto: {
         ...post,
       },

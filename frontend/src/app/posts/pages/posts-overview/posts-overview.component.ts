@@ -23,7 +23,7 @@ export class PostsOverviewComponent implements OnInit {
   }
 
   async deletePost(id: number) {
-    await this.api.deletePost({ id: id.toString() });
+    await this.api.deletePost({ id });
     await this.getPosts();
   }
 }

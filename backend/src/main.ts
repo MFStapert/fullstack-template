@@ -1,3 +1,4 @@
+import { runMigrations } from '@db/migrate';
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -14,15 +15,19 @@ function setupSwagger(app: INestApplication) {
   const document = SwaggerModule.createDocument(app, config);
 
   // Write openapi spec to frontend folder, so we can use it for code generation
-  if (process.env.NODE_ENV === 'LOCAL') {
-    fs.writeFileSync('../frontend/openapi/backend.json', JSON.stringify(document), {});
-  }
+  fs.writeFileSync('../frontend/openapi/backend.json', JSON.stringify(document), {});
   SwaggerModule.setup('swagger', app, document);
 }
 
 async function bootstrap() {
+  await runMigrations();
+
   const app = await NestFactory.create(AppModule);
-  setupSwagger(app);
+  if (process.env.NODE_ENV === 'LOCAL') {
+    setupSwagger(app);
+  }
+  app.enableShutdownHooks();
+
   await app.listen(8080);
 }
 bootstrap();

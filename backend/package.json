@@ -3,22 +3,19 @@
   "version": "0.0.0",
   "scripts": {
     "clean": "rm -rf dist && rm -rf node_modules",
-    "generate": "prisma generate",
     "start": "nest start --watch",
-    "prebuild": "npm run generate",
     "build": "nest build",
-    "test": "jest",
-    "prepare": "npm run generate",
-    "database:reset": "prisma migrate reset -f"
+    "test": "jest"
   },
   "dependencies": {
+    "@knaadh/nestjs-drizzle-postgres": "1.0.0",
     "@nestjs/common": "10.3.10",
     "@nestjs/config": "3.2.3",
     "@nestjs/core": "10.3.10",
     "@nestjs/platform-express": "10.3.10",
     "@nestjs/swagger": "7.4.0",
-    "@prisma/client": "5.18.0",
-    "prisma": "5.18.0",
+    "drizzle-orm": "0.33.0",
+    "postgres": "3.4.4",
     "reflect-metadata": "0.2.2"
   },
   "devDependencies": {
@@ -29,6 +26,7 @@
     "@types/jest": "catalog:",
     "@types/node": "catalog:",
     "@types/supertest": "6.0.2",
+    "drizzle-kit": "0.24.0",
     "jest": "catalog:",
     "source-map-support": "0.5.21",
     "supertest": "7.0.0",
@@ -37,8 +35,5 @@
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
     "typescript": "catalog:"
-  },
-  "prisma": {
-    "seed": "ts-node prisma/seed.ts"
   }
 }

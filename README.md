@@ -2,6 +2,7 @@
 
 Template for fullstack setup, includes:
 
+- database (postgres)
 - backend (nestjs)
 - frontend (angular)
 - reverse proxy (caddy)
@@ -9,7 +10,7 @@ Template for fullstack setup, includes:
 
 The project can be managed with single commands using `just`.
 
-To view all available commands, run `just`.
+To view all available commands, run `just` after following the installation instructions
 
 ## System requirements
 
@@ -26,13 +27,13 @@ To view all available commands, run `just`.
 
 ## Run
 
-- Start Development Environment:
+`just infra`
+
+This command starts the infrastructure containers.
 
 `just start`
 
-This command starts the infrastructure containers, as well as the frontend and backend in node.
-
-- Build and Start All Containers:
+This command starts front and backend.
 
 `just docker`
 

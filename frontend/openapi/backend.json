@@ -13,11 +13,23 @@
         }
       }
     },
+    "/healthcheck": {
+      "get": {
+        "operationId": "AppController_healthcheck",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": { "application/json": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
     "/posts/{id}": {
       "get": {
         "operationId": "PostsController_getPostById",
         "parameters": [
-          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }
         ],
         "responses": {
           "200": {
@@ -31,7 +43,7 @@
       "put": {
         "operationId": "PostsController_updatePost",
         "parameters": [
-          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }
         ],
         "requestBody": {
           "required": true,
@@ -51,7 +63,7 @@
       "delete": {
         "operationId": "PostsController_deletePost",
         "parameters": [
-          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }
         ],
         "responses": {
           "200": {

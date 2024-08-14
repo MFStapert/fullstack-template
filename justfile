@@ -27,9 +27,12 @@ test:
 build:
  pnpm run -r build
 
-# Start the development environment using docker and run start scripts
-start:
+# Starts db and reverse proxy
+infra:
  docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
+
+# Start the front and backend
+start:
  pnpm run -r "/^start.*/"
 
 # Run Playwright end-to-end tests in watch mode
