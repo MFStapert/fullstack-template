@@ -1,13 +1,12 @@
 import { schema } from '@db/schema';
 import { DrizzlePostgresModule } from '@knaadh/nestjs-drizzle-postgres';
-import { Module } from '@nestjs/common';
-import { PostsController } from './controllers/posts.controller';
-import { PostsService } from './services/posts.service';
+import { Global, Module } from '@nestjs/common';
 
+@Global()
 @Module({
   imports: [
     DrizzlePostgresModule.registerAsync({
-      tag: 'POSTS',
+      tag: 'DB',
       useFactory() {
         return {
           postgres: {
@@ -18,7 +17,6 @@ import { PostsService } from './services/posts.service';
       },
     }),
   ],
-  controllers: [PostsController],
-  providers: [PostsService],
+  exports: [DrizzlePostgresModule],
 })
-export class PostsModule {}
+export class DbModule {}
