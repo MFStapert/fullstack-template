@@ -3,12 +3,12 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreateMeetDto } from '../dto/create-meet.dto';
 import { MeetDetailDto } from '../dto/meet-detail.dto';
 import { MeetOverviewDto } from '../dto/meet-overview.dto';
-import { MeetsService } from '../services/meets.service';
+import { MeetService } from '../services/meet.service';
 
 @ApiTags('Meets')
 @Controller('meets')
-export class MeetsController {
-  constructor(private readonly meetsService: MeetsService) {}
+export class MeetController {
+  constructor(private readonly meetsService: MeetService) {}
 
   @Get('')
   async getMeets(): Promise<MeetOverviewDto[]> {

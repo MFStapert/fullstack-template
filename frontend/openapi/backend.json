@@ -1,18 +1,6 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/hello": {
-      "get": {
-        "operationId": "AppController_getHello",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": { "application/json": { "schema": { "type": "string" } } }
-          }
-        }
-      }
-    },
     "/healthcheck": {
       "get": {
         "operationId": "AppController_healthcheck",
@@ -25,88 +13,114 @@
         }
       }
     },
-    "/posts/{id}": {
+    "/meets": {
       "get": {
-        "operationId": "PostsController_getPostById",
-        "parameters": [
-          { "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "PostsController_updatePost",
-        "parameters": [
-          { "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "PostsController_deletePost",
-        "parameters": [
-          { "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
-            }
-          }
-        }
-      }
-    },
-    "/posts": {
-      "get": {
-        "operationId": "PostsController_getPosts",
+        "operationId": "MeetController_getMeets",
         "parameters": [],
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
-                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/PostDto" } }
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/MeetOverviewDto" }
+                }
               }
             }
           }
-        }
+        },
+        "tags": ["Meets"]
       },
       "post": {
-        "operationId": "PostsController_createPost",
+        "operationId": "MeetController_createMeet",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": { "schema": { "$ref": "#/components/schemas/CreatePostDto" } }
+            "application/json": { "schema": { "$ref": "#/components/schemas/CreateMeetDto" } }
           }
         },
         "responses": {
           "201": {
             "description": "",
             "content": {
-              "application/json": { "schema": { "$ref": "#/components/schemas/PostDto" } }
+              "application/json": { "schema": { "$ref": "#/components/schemas/MeetDetailDto" } }
             }
           }
-        }
+        },
+        "tags": ["Meets"]
+      }
+    },
+    "/meets/{id}": {
+      "get": {
+        "operationId": "MeetController_getMeet",
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/MeetDetailDto" } }
+            }
+          }
+        },
+        "tags": ["Meets"]
+      }
+    },
+    "/locations": {
+      "get": {
+        "operationId": "LocationController_getLocations",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/LocationDto" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Locations"]
+      }
+    },
+    "/users": {
+      "get": {
+        "operationId": "UserController_getUsers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/UserDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Users"]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "UserController_getUser",
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/UserDto" } }
+            }
+          }
+        },
+        "tags": ["Users"]
       }
     }
   },
@@ -115,20 +129,38 @@
   "servers": [{ "url": "http://localhost/api" }],
   "components": {
     "schemas": {
-      "PostDto": {
+      "MeetOverviewDto": {
+        "type": "object",
+        "properties": { "id": { "type": "number" }, "title": { "type": "string" } },
+        "required": ["id", "title"]
+      },
+      "CreateMeetDto": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "users": { "type": "array", "items": { "type": "number" } }
+        },
+        "required": ["title", "users"]
+      },
+      "MeetDetailDto": {
         "type": "object",
         "properties": {
           "id": { "type": "number" },
           "title": { "type": "string" },
-          "content": { "type": "string" },
-          "published": { "type": "boolean" }
+          "locationTitle": { "type": "string" },
+          "userNames": { "type": "array", "items": { "type": "string" } }
         },
+        "required": ["id", "title", "locationTitle", "userNames"]
+      },
+      "LocationDto": {
+        "type": "object",
+        "properties": { "id": { "type": "number" }, "title": { "type": "string" } },
         "required": ["id", "title"]
       },
-      "CreatePostDto": {
+      "UserDto": {
         "type": "object",
-        "properties": { "title": { "type": "string" }, "content": { "type": "string" } },
-        "required": ["title"]
+        "properties": { "id": { "type": "number" }, "name": { "type": "string" } },
+        "required": ["id", "name"]
       }
     }
   }

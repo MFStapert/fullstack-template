@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { LocationDto } from '../dto/location.dto';
-import { LocationsService } from '../services/locations.service';
+import { LocationService } from '../service/location.service';
 
-@ApiTags('Location')
+@ApiTags('Locations')
 @Controller('locations')
-export class LocationsController {
-  constructor(private readonly locationsService: LocationsService) {}
+export class LocationController {
+  constructor(private readonly locationsService: LocationService) {}
 
   @Get('')
   async getLocations(): Promise<LocationDto[]> {

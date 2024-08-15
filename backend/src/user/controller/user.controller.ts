@@ -1,12 +1,12 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UserDto } from '../dto/user.dto';
-import { UsersService } from '../services/users.service';
+import { UserService } from '../service/user.service';
 
 @ApiTags('Users')
 @Controller('users')
-export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+export class UserController {
+  constructor(private readonly usersService: UserService) {}
 
   @Get('')
   async getUsers(): Promise<UserDto[]> {

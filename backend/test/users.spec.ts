@@ -2,7 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { PostgreSqlContainer } from '@testcontainers/postgresql';
 import { StartedPostgreSqlContainer } from '@testcontainers/postgresql/build/postgresql-container';
 import request from 'supertest';
-import { UsersModule } from '../src/users/users.module';
+import { UserModule } from '../src/user/user.module';
 import { createTestingModule } from './shared/test-database.module';
 
 describe('users e2e', () => {
@@ -11,7 +11,7 @@ describe('users e2e', () => {
 
   beforeAll(async () => {
     postgresContainer = await new PostgreSqlContainer().start();
-    const moduleFixture = await createTestingModule(postgresContainer, [UsersModule]);
+    const moduleFixture = await createTestingModule(postgresContainer, [UserModule]);
     app = moduleFixture.createNestApplication();
     await app.init();
   });

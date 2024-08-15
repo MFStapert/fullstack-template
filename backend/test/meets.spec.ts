@@ -2,8 +2,8 @@ import { INestApplication } from '@nestjs/common';
 import { PostgreSqlContainer } from '@testcontainers/postgresql';
 import { StartedPostgreSqlContainer } from '@testcontainers/postgresql/build/postgresql-container';
 import request from 'supertest';
-import { CreateMeetDto } from '../src/meets/dto/create-meet.dto';
-import { MeetsModule } from '../src/meets/meets.module';
+import { CreateMeetDto } from '../src/meet/dto/create-meet.dto';
+import { MeetModule } from '../src/meet/meet.module';
 import { createTestingModule } from './shared/test-database.module';
 
 describe('meets e2e', () => {
@@ -12,7 +12,7 @@ describe('meets e2e', () => {
 
   beforeAll(async () => {
     postgresContainer = await new PostgreSqlContainer().start();
-    const moduleFixture = await createTestingModule(postgresContainer, [MeetsModule]);
+    const moduleFixture = await createTestingModule(postgresContainer, [MeetModule]);
     app = moduleFixture.createNestApplication();
     await app.init();
   });

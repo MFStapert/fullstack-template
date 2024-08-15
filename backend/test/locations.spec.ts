@@ -2,7 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { PostgreSqlContainer } from '@testcontainers/postgresql';
 import { StartedPostgreSqlContainer } from '@testcontainers/postgresql/build/postgresql-container';
 import request from 'supertest';
-import { LocationsModule } from '../src/locations/locations.module';
+import { LocationModule } from '../src/location/location.module';
 import { createTestingModule } from './shared/test-database.module';
 
 describe('locations e2e', () => {
@@ -11,7 +11,7 @@ describe('locations e2e', () => {
 
   beforeAll(async () => {
     postgresContainer = await new PostgreSqlContainer().start();
-    const moduleFixture = await createTestingModule(postgresContainer, [LocationsModule]);
+    const moduleFixture = await createTestingModule(postgresContainer, [LocationModule]);
     app = moduleFixture.createNestApplication();
     await app.init();
   });

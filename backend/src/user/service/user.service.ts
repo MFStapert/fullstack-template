@@ -5,7 +5,7 @@ import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { UserDto } from '../dto/user.dto';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(@Inject('DB') private db: PostgresJsDatabase<typeof schema>) {}
 
   async getUser(userId: number): Promise<UserDto> {

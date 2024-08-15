@@ -4,7 +4,7 @@ import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { LocationDto } from '../dto/location.dto';
 
 @Injectable()
-export class LocationsService {
+export class LocationService {
   constructor(@Inject('DB') private db: PostgresJsDatabase<typeof schema>) {}
 
   async getLocations(): Promise<LocationDto[]> {

@@ -5,10 +5,10 @@ import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { CreateMeetDto } from '../dto/create-meet.dto';
 import { MeetDetailDto } from '../dto/meet-detail.dto';
 import { MeetOverviewDto } from '../dto/meet-overview.dto';
-import { toUserToMeet } from '../mappers/meets.mappers';
+import { toUserToMeet } from '../mappers/meet.mappers';
 
 @Injectable()
-export class MeetsService {
+export class MeetService {
   constructor(@Inject('DB') private db: PostgresJsDatabase<typeof schema>) {}
 
   async getMeets(): Promise<MeetOverviewDto[]> {
