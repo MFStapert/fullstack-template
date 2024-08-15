@@ -5,7 +5,7 @@ import request from 'supertest';
 import { LocationsModule } from '../src/locations/locations.module';
 import { createTestingModule } from './shared/test-database.module';
 
-describe('location e2e', () => {
+describe('locations e2e', () => {
   let app: INestApplication;
   let postgresContainer: StartedPostgreSqlContainer;
 
@@ -21,7 +21,7 @@ describe('location e2e', () => {
     await postgresContainer.stop();
   });
 
-  it('/locations (GET)', () => {
+  it('(GET) /locations', () => {
     return request(app.getHttpServer())
       .get('/locations')
       .expect(200)
