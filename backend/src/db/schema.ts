@@ -1,14 +1,28 @@
 import { relations } from 'drizzle-orm';
-import { integer, pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const locationTable = pgTable('location', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
 });
 
+export const userTable = pgTable('user', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+});
+
+export const usersRelations = relations(userTable, ({ many }) => ({
+  userToMeets: many(userToMeetTable),
+}));
+
 export const meetTable = pgTable('meet', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
+  createdBy: integer('created_by')
+    .notNull()
+    .references(() => userTable.id),
+  time: timestamp('time').notNull(),
+  finalized: boolean('finalized').notNull().default(false),
   locationId: integer('location_id').references(() => locationTable.id),
 });
 
@@ -18,15 +32,10 @@ export const meetsRelations = relations(meetTable, ({ many, one }) => ({
     fields: [meetTable.locationId],
     references: [locationTable.id],
   }),
-}));
-
-export const userTable = pgTable('user', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-});
-
-export const usersRelations = relations(userTable, ({ many }) => ({
-  userToMeets: many(userToMeetTable),
+  createdBy: one(userTable, {
+    fields: [meetTable.createdBy],
+    references: [userTable.id],
+  }),
 }));
 
 export const userToMeetTable = pgTable('user_to_meet', {

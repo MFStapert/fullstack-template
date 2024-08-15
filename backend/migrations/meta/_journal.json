@@ -8,6 +8,13 @@
       "when": 1723748136429,
       "tag": "0000_amazing_proteus",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1723763820104,
+      "tag": "0001_wide_wild_child",
+      "breakpoints": true
     }
   ]
 }

@@ -138,9 +138,10 @@
         "type": "object",
         "properties": {
           "title": { "type": "string" },
+          "createdBy": { "type": "number" },
           "users": { "type": "array", "items": { "type": "number" } }
         },
-        "required": ["title", "users"]
+        "required": ["title", "createdBy", "users"]
       },
       "MeetDetailDto": {
         "type": "object",

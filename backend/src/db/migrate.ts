@@ -2,7 +2,6 @@ import { schema } from '@db/schema';
 import { seed } from '@db/seed';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
-import process from 'node:process';
 import postgres from 'postgres';
 
 export async function runMigrations() {
@@ -11,7 +10,7 @@ export async function runMigrations() {
   const db = drizzle<typeof schema>(sql);
   await migrate(db, { migrationsFolder: './migrations' });
   if (process.env.NODE_ENV !== 'PRODUCTION') {
-    await seed(db);
+    await seed(db, sql);
   }
   await sql.end();
   console.log('Finished running migrations...');

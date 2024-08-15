@@ -26,15 +26,15 @@ describe('users e2e', () => {
       .get('/users')
       .expect(200)
       .expect([
-        { id: 1, name: 'Marijn' },
-        { id: 2, name: 'Yorick' },
+        { id: 31, name: 'Marijn' },
+        { id: 92, name: 'Yorick' },
       ]);
   });
 
-  it('(GET) /users/1', () => {
+  it('(GET) /users/:id', () => {
     return request(app.getHttpServer())
-      .get('/users/1')
+      .get('/users/31')
       .expect(200)
-      .expect({ id: 1, name: 'Marijn' });
+      .expect({ id: 31, name: 'Marijn' });
   });
 });

@@ -25,13 +25,40 @@ describe('meets e2e', () => {
   it('(POST) /meets', () => {
     const createMeetDto: CreateMeetDto = {
       title: 'new meet',
-      users: [1, 2],
+      createdBy: 31,
+      users: [31, 92],
     };
     return request(app.getHttpServer())
       .post('/meets')
       .send(createMeetDto)
       .expect(201)
       .expect({ id: 1, title: 'new meet', userNames: ['Marijn', 'Yorick'] });
+  });
+
+  it('(POST) /meets [invalid user]', () => {
+    const createMeetDto: CreateMeetDto = {
+      title: 'new meet',
+      createdBy: 1,
+      users: [1, 2],
+    };
+    return request(app.getHttpServer())
+      .post('/meets')
+      .send(createMeetDto)
+      .expect(400)
+      .expect({ message: 'Invalid user was added', error: 'Bad Request', statusCode: 400 });
+  });
+
+  it('(POST) /meets [invalid createdBy]', () => {
+    const createMeetDto: CreateMeetDto = {
+      title: 'new meet',
+      createdBy: 1,
+      users: [92, 31],
+    };
+    return request(app.getHttpServer())
+      .post('/meets')
+      .send(createMeetDto)
+      .expect(400)
+      .expect({ message: 'Invalid createdBy', error: 'Bad Request', statusCode: 400 });
   });
 
   it('(GET) /meets/1', () => {
