@@ -110,4 +110,11 @@ describe('meets e2e', () => {
     };
     return request(app.getHttpServer()).post('/meets/1/vote').send(voteDto).expect(500);
   });
+
+  it('Get votes by match id', () => {
+    return request(app.getHttpServer())
+      .get('/meets/1/votes')
+      .expect(200)
+      .expect([{ createdBy: 2, locationId: 1 }]);
+  });
 });

@@ -1,11 +1,20 @@
 import { schema, voteTable } from '@db/schema';
 import { Inject, Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { CreateVoteDto } from '../dto/create.vote.dto';
+import { VoteDto } from '../dto/vote.dto';
 
 @Injectable()
 export class VoteService {
   constructor(@Inject('DB') private db: PostgresJsDatabase<typeof schema>) {}
+
+  async getVotesByMeet(meetId: number): Promise<VoteDto[]> {
+    return this.db
+      .select({ createdBy: voteTable.createdBy, locationId: voteTable.locationId })
+      .from(voteTable)
+      .where(eq(voteTable.meetId, meetId));
+  }
 
   async createVote(meetId: number, createVoteDto: CreateVoteDto): Promise<void> {
     await this.db.insert(voteTable).values({
