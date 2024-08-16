@@ -22,20 +22,7 @@ describe('meets e2e', () => {
     await postgresContainer.stop();
   });
 
-  it('(POST) /meets', () => {
-    const createMeetDto: CreateMeetDto = {
-      title: 'new meet',
-      createdBy: 31,
-      users: [31, 92],
-    };
-    return request(app.getHttpServer())
-      .post('/meets')
-      .send(createMeetDto)
-      .expect(201)
-      .expect({ id: 1, title: 'new meet', userNames: ['Marijn', 'Yorick'] });
-  });
-
-  it('(POST) /meets [invalid user]', () => {
+  it('Create meet', () => {
     const createMeetDto: CreateMeetDto = {
       title: 'new meet',
       createdBy: 1,
@@ -44,15 +31,28 @@ describe('meets e2e', () => {
     return request(app.getHttpServer())
       .post('/meets')
       .send(createMeetDto)
+      .expect(201)
+      .expect({ id: 2, title: 'new meet', userNames: ['Marijn', 'Yorick'] });
+  });
+
+  it('Create meet - invalid user', () => {
+    const createMeetDto: CreateMeetDto = {
+      title: 'new meet',
+      createdBy: 1,
+      users: [31, 92],
+    };
+    return request(app.getHttpServer())
+      .post('/meets')
+      .send(createMeetDto)
       .expect(400)
       .expect({ message: 'Invalid user was added', error: 'Bad Request', statusCode: 400 });
   });
 
-  it('(POST) /meets [invalid createdBy]', () => {
+  it('Create meet - invalid createdBy', () => {
     const createMeetDto: CreateMeetDto = {
       title: 'new meet',
-      createdBy: 1,
-      users: [92, 31],
+      createdBy: 31,
+      users: [2, 1],
     };
     return request(app.getHttpServer())
       .post('/meets')
@@ -61,17 +61,20 @@ describe('meets e2e', () => {
       .expect({ message: 'Invalid createdBy', error: 'Bad Request', statusCode: 400 });
   });
 
-  it('(GET) /meets/1', () => {
+  it('Get meet by id', () => {
     return request(app.getHttpServer())
       .get('/meets/1')
       .expect(200)
-      .expect({ id: 1, title: 'new meet', userNames: ['Marijn', 'Yorick'] });
+      .expect({ id: 1, title: 'seed meet', userNames: ['Marijn'] });
   });
 
-  it('(GET) /meets', () => {
+  it('Get meets by user', () => {
     return request(app.getHttpServer())
-      .get('/meets')
+      .get('/meets/by-user/1')
       .expect(200)
-      .expect([{ id: 1, title: 'new meet' }]);
+      .expect([
+        { id: 1, title: 'seed meet' },
+        { id: 2, title: 'new meet' },
+      ]);
   });
 });

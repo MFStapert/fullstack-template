@@ -21,20 +21,20 @@ describe('users e2e', () => {
     await postgresContainer.stop();
   });
 
-  it('(GET) /users', () => {
+  it('Get users', () => {
     return request(app.getHttpServer())
       .get('/users')
       .expect(200)
       .expect([
-        { id: 31, name: 'Marijn' },
-        { id: 92, name: 'Yorick' },
+        { id: 1, name: 'Marijn' },
+        { id: 2, name: 'Yorick' },
       ]);
   });
 
-  it('(GET) /users/:id', () => {
+  it('Get user by id', () => {
     return request(app.getHttpServer())
-      .get('/users/31')
+      .get('/users/1')
       .expect(200)
-      .expect({ id: 31, name: 'Marijn' });
+      .expect({ id: 1, name: 'Marijn' });
   });
 });

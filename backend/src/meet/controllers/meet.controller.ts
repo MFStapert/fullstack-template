@@ -10,18 +10,18 @@ import { MeetService } from '../services/meet.service';
 export class MeetController {
   constructor(private readonly meetsService: MeetService) {}
 
-  @Get('')
-  async getMeets(): Promise<MeetOverviewDto[]> {
-    return this.meetsService.getMeets();
-  }
-
   @Post('')
   async createMeet(@Body() meet: CreateMeetDto): Promise<MeetDetailDto> {
     return this.meetsService.createMeet(meet);
   }
 
-  @Get(':id')
-  async getMeet(@Param('id', ParseIntPipe) id: number): Promise<MeetDetailDto> {
-    return this.meetsService.getMeet(id);
+  @Get(':meetId')
+  async getMeet(@Param('meetId', ParseIntPipe) meetId: number): Promise<MeetDetailDto> {
+    return this.meetsService.getMeet(meetId);
+  }
+
+  @Get('by-user/:userId')
+  async getMeetsByUser(@Param('userId', ParseIntPipe) userId: number): Promise<MeetOverviewDto[]> {
+    return this.meetsService.getMeetByUserId(userId);
   }
 }

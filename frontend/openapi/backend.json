@@ -14,24 +14,6 @@
       }
     },
     "/meets": {
-      "get": {
-        "operationId": "MeetController_getMeets",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": { "$ref": "#/components/schemas/MeetOverviewDto" }
-                }
-              }
-            }
-          }
-        },
-        "tags": ["Meets"]
-      },
       "post": {
         "operationId": "MeetController_createMeet",
         "parameters": [],
@@ -52,17 +34,39 @@
         "tags": ["Meets"]
       }
     },
-    "/meets/{id}": {
+    "/meets/{meetId}": {
       "get": {
         "operationId": "MeetController_getMeet",
         "parameters": [
-          { "name": "id", "required": true, "in": "path", "schema": { "type": "number" } }
+          { "name": "meetId", "required": true, "in": "path", "schema": { "type": "number" } }
         ],
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": { "schema": { "$ref": "#/components/schemas/MeetDetailDto" } }
+            }
+          }
+        },
+        "tags": ["Meets"]
+      }
+    },
+    "/meets/by-user/{userId}": {
+      "get": {
+        "operationId": "MeetController_getMeetsByUser",
+        "parameters": [
+          { "name": "userId", "required": true, "in": "path", "schema": { "type": "number" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/MeetOverviewDto" }
+                }
+              }
             }
           }
         },
@@ -129,11 +133,6 @@
   "servers": [{ "url": "http://localhost/api" }],
   "components": {
     "schemas": {
-      "MeetOverviewDto": {
-        "type": "object",
-        "properties": { "id": { "type": "number" }, "title": { "type": "string" } },
-        "required": ["id", "title"]
-      },
       "CreateMeetDto": {
         "type": "object",
         "properties": {
@@ -152,6 +151,11 @@
           "userNames": { "type": "array", "items": { "type": "string" } }
         },
         "required": ["id", "title", "locationTitle", "userNames"]
+      },
+      "MeetOverviewDto": {
+        "type": "object",
+        "properties": { "id": { "type": "number" }, "title": { "type": "string" } },
+        "required": ["id", "title"]
       },
       "LocationDto": {
         "type": "object",

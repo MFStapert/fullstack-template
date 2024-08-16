@@ -12,13 +12,15 @@ import { toUserToMeet } from '../mappers/meet.mappers';
 export class MeetService {
   constructor(@Inject('DB') private db: PostgresJsDatabase<typeof schema>) {}
 
-  async getMeets(): Promise<MeetOverviewDto[]> {
+  async getMeetByUserId(userId: number): Promise<MeetOverviewDto[]> {
     return this.db
       .select({
         id: meetTable.id,
         title: meetTable.title,
       })
-      .from(meetTable);
+      .from(meetTable)
+      .leftJoin(userToMeetTable, eq(meetTable.id, userToMeetTable.meetId))
+      .where(eq(userToMeetTable.userId, userId));
   }
 
   async createMeet(createMeetDto: CreateMeetDto): Promise<MeetDetailDto> {

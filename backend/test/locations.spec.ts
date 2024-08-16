@@ -21,7 +21,7 @@ describe('locations e2e', () => {
     await postgresContainer.stop();
   });
 
-  it('(GET) /locations', () => {
+  it('Get locations', () => {
     return request(app.getHttpServer())
       .get('/locations')
       .expect(200)

@@ -11,6 +11,7 @@ export async function seed(db: PostgresJsDatabase<typeof schema>, sql: Sql) {
 
   await seedLocations(db, sql);
   await seedUsers(db, sql);
+  await seedMeets(db, sql);
 
   console.log('Finished running seed method...');
 }
@@ -35,11 +36,11 @@ export async function seedLocations(db: PostgresJsDatabase<typeof schema>, sql: 
 export async function seedUsers(db: PostgresJsDatabase<typeof schema>, sql: Sql) {
   const users = [
     {
-      id: 31,
+      id: 1,
       name: 'Marijn',
     },
     {
-      id: 92,
+      id: 2,
       name: 'Yorick',
     },
   ];
@@ -48,6 +49,32 @@ export async function seedUsers(db: PostgresJsDatabase<typeof schema>, sql: Sql)
   await sql`SELECT setval(
     pg_get_serial_sequence('user', 'id'),
     (SELECT COALESCE(MAX(id) + 1, 1) FROM "user"),
+    false
+  );`;
+  return result;
+}
+
+export async function seedMeets(db: PostgresJsDatabase<typeof schema>, sql: Sql) {
+  const meets = [
+    {
+      id: 1,
+      title: 'seed meet',
+      createdBy: 1,
+      time: new Date(),
+    },
+  ];
+  const result = await db.insert(meetTable).values(meets).returning();
+  await db
+    .insert(userToMeetTable)
+    .values({
+      userId: 1,
+      meetId: 1,
+    })
+    .returning();
+
+  await sql`SELECT setval(
+    pg_get_serial_sequence('meet', 'id'),
+    (SELECT COALESCE(MAX(id) + 1, 1) FROM "meet"),
     false
   );`;
   return result;

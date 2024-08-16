@@ -11,10 +11,6 @@ export const userTable = pgTable('user', {
   name: text('name').notNull(),
 });
 
-export const usersRelations = relations(userTable, ({ many }) => ({
-  userToMeets: many(userToMeetTable),
-}));
-
 export const meetTable = pgTable('meet', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
@@ -63,7 +59,6 @@ export const schema = {
   meetsRelations,
   locationTable,
   userTable,
-  usersRelations,
   userToMeetTable,
   usersToMeetsRelations,
 };
