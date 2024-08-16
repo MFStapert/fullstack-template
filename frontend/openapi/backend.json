@@ -73,6 +73,22 @@
         "tags": ["Meets"]
       }
     },
+    "/meets/{meetId}/vote": {
+      "post": {
+        "operationId": "MeetController_createVote",
+        "parameters": [
+          { "name": "meetId", "required": true, "in": "path", "schema": { "type": "number" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/CreateVoteDto" } }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "tags": ["Meets"]
+      }
+    },
     "/locations": {
       "get": {
         "operationId": "LocationController_getLocations",
@@ -148,14 +164,20 @@
           "id": { "type": "number" },
           "title": { "type": "string" },
           "locationTitle": { "type": "string" },
+          "createdBy": { "type": "number" },
           "userNames": { "type": "array", "items": { "type": "string" } }
         },
-        "required": ["id", "title", "locationTitle", "userNames"]
+        "required": ["id", "title", "locationTitle", "createdBy", "userNames"]
       },
       "MeetOverviewDto": {
         "type": "object",
         "properties": { "id": { "type": "number" }, "title": { "type": "string" } },
         "required": ["id", "title"]
+      },
+      "CreateVoteDto": {
+        "type": "object",
+        "properties": { "createdBy": { "type": "number" }, "locationId": { "type": "number" } },
+        "required": ["createdBy", "locationId"]
       },
       "LocationDto": {
         "type": "object",

@@ -15,6 +15,13 @@
       "when": 1723763820104,
       "tag": "0001_wide_wild_child",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1723768880546,
+      "tag": "0002_lean_doctor_strange",
+      "breakpoints": true
     }
   ]
 }

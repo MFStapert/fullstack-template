@@ -1,8 +1,7 @@
-import { meetTable, schema, userTable, userToMeetTable } from '@db/schema';
-import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { meetTable, schema, userToMeetTable } from '@db/schema';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import { inArray } from 'drizzle-orm/sql/expressions/conditions';
 import { CreateMeetDto } from '../dto/create-meet.dto';
 import { MeetDetailDto } from '../dto/meet-detail.dto';
 import { MeetOverviewDto } from '../dto/meet-overview.dto';
@@ -24,17 +23,6 @@ export class MeetService {
   }
 
   async createMeet(createMeetDto: CreateMeetDto): Promise<MeetDetailDto> {
-    const users = await this.db
-      .select()
-      .from(userTable)
-      .where(inArray(userTable.id, createMeetDto.users));
-    if (users.length !== createMeetDto.users.length) {
-      throw new BadRequestException('Invalid user was added');
-    }
-    if (!users.map(user => user.id).includes(createMeetDto.createdBy)) {
-      throw new BadRequestException('Invalid createdBy');
-    }
-
     const futureDate = new Date();
     futureDate.setMinutes(futureDate.getMinutes() + 2);
 
@@ -61,6 +49,7 @@ export class MeetService {
           },
         },
         location: true,
+        createdBy: true,
       },
       where: eq(meetTable.id, id),
     });
@@ -72,6 +61,7 @@ export class MeetService {
     return {
       id: meet.id,
       title: meet.title,
+      createdBy: meet.createdBy.id,
       locationTitle: meet.location?.title,
       userNames: meet.meetToUsers.map(({ user }) => user.name),
     };

@@ -1,5 +1,13 @@
 import { relations } from 'drizzle-orm';
-import { boolean, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import {
+  boolean,
+  integer,
+  pgTable,
+  primaryKey,
+  serial,
+  text,
+  timestamp,
+} from 'drizzle-orm/pg-core';
 
 export const locationTable = pgTable('location', {
   id: serial('id').primaryKey(),
@@ -21,6 +29,26 @@ export const meetTable = pgTable('meet', {
   finalized: boolean('finalized').notNull().default(false),
   locationId: integer('location_id').references(() => locationTable.id),
 });
+
+export const voteTable = pgTable(
+  'vote',
+  {
+    createdBy: integer('created_by')
+      .notNull()
+      .references(() => userTable.id),
+    locationId: integer('location_id')
+      .notNull()
+      .references(() => locationTable.id),
+    meetId: integer('meet_id')
+      .notNull()
+      .references(() => meetTable.id),
+  },
+  table => {
+    return {
+      pk: primaryKey({ columns: [table.createdBy, table.locationId, table.meetId] }),
+    };
+  },
+);
 
 export const meetsRelations = relations(meetTable, ({ many, one }) => ({
   meetToUsers: many(userToMeetTable),
