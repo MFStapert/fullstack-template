@@ -28,4 +28,13 @@ export class VoteService {
     });
     await this.meetsService.finalizeMeet(meetId);
   }
+
+  async updateVote(voteId: number, locationId: number): Promise<void> {
+    await this.db
+      .update(voteTable)
+      .set({
+        locationId: locationId,
+      })
+      .where(eq(voteTable.id, voteId));
+  }
 }

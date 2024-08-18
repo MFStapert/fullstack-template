@@ -8,6 +8,13 @@
       "when": 1723774658530,
       "tag": "0000_narrow_ironclad",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1724020739730,
+      "tag": "0001_blushing_quicksilver",
+      "breakpoints": true
     }
   ]
 }

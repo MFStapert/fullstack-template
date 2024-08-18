@@ -3,6 +3,7 @@ import { PostgreSqlContainer } from '@testcontainers/postgresql';
 import { StartedPostgreSqlContainer } from '@testcontainers/postgresql/build/postgresql-container';
 import request from 'supertest';
 import { CreateVoteDto } from '../src/meet/dto/create.vote.dto';
+import { UpdateVoteDto } from '../src/meet/dto/update.vote.dto';
 import { MeetModule } from '../src/meet/meet.module';
 import { createMeetFactory } from './factory/create-meet.factory';
 import { createTestingModule } from './shared/test-database.module';
@@ -76,6 +77,13 @@ describe('meets e2e', () => {
     return request(app.getHttpServer()).post('/meets/1/vote').send(voteDto).expect(201);
   });
 
+  it('Update vote', async () => {
+    const voteDto: UpdateVoteDto = {
+      locationId: 2,
+    };
+    await request(app.getHttpServer()).put('/meets/votes/1').send(voteDto).expect(200);
+  });
+
   it('Create vote - invalid match', () => {
     const voteDto: CreateVoteDto = {
       createdBy: 2,
@@ -133,7 +141,7 @@ describe('meets e2e', () => {
   it('Create vote - no duplicates', () => {
     const voteDto: CreateVoteDto = {
       createdBy: 1,
-      locationId: 1,
+      locationId: 2,
     };
     return request(app.getHttpServer()).post('/meets/1/vote').send(voteDto).expect(500);
   });
@@ -142,6 +150,6 @@ describe('meets e2e', () => {
     return request(app.getHttpServer())
       .get('/meets/1/votes')
       .expect(200)
-      .expect([{ createdBy: 1, locationId: 1 }]);
+      .expect([{ createdBy: 1, locationId: 2 }]);
   });
 });

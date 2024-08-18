@@ -23,6 +23,10 @@ export async function seedLocations(db: PostgresJsDatabase<typeof schema>, sql: 
       id: 1,
       title: 'Ijssel',
     },
+    {
+      id: 2,
+      title: 'de_dust2',
+    },
   ];
   const result = await db.insert(locationTable).values(locations).returning();
 
