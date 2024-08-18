@@ -4,10 +4,14 @@ import { eq } from 'drizzle-orm';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { CreateVoteDto } from '../dto/create.vote.dto';
 import { VoteDto } from '../dto/vote.dto';
+import { MeetService } from './meet.service';
 
 @Injectable()
 export class VoteService {
-  constructor(@Inject('DB') private db: PostgresJsDatabase<typeof schema>) {}
+  constructor(
+    private readonly meetsService: MeetService,
+    @Inject('DB') private db: PostgresJsDatabase<typeof schema>,
+  ) {}
 
   async getVotesByMeet(meetId: number): Promise<VoteDto[]> {
     return this.db
@@ -22,5 +26,6 @@ export class VoteService {
       createdBy: createVoteDto.createdBy,
       locationId: createVoteDto.locationId,
     });
+    await this.meetsService.finalizeMeet(meetId);
   }
 }

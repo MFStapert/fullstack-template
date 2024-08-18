@@ -1,6 +1,6 @@
-import { meetTable, schema, userToMeetTable } from '@db/schema';
+import { meetTable, schema, userToMeetTable, voteTable } from '@db/schema';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
+import { and, count, eq, isNull } from 'drizzle-orm';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { CreateMeetDto } from '../dto/create-meet.dto';
 import { MeetDetailDto } from '../dto/meet-detail.dto';
@@ -32,11 +32,11 @@ export class MeetService {
         title: createMeetDto.title,
         time: futureDate,
         createdBy: createMeetDto.createdBy,
+        finalized: false,
       })
       .returning();
 
     await this.db.insert(userToMeetTable).values(toUserToMeet(meet.id, createMeetDto));
-
     return this.getMeet(meet.id);
   }
 
@@ -61,9 +61,35 @@ export class MeetService {
     return {
       id: meet.id,
       title: meet.title,
+      finalized: meet.finalized,
       createdBy: meet.createdBy.id,
       locationTitle: meet.location?.title,
       userNames: meet.meetToUsers.map(({ user }) => user.name),
     };
+  }
+
+  public async finalizeMeet(meetId: number): Promise<void> {
+    const votersLeftOnMeet = await this.votersLeftOnMeet(meetId);
+    if (votersLeftOnMeet.length === 0) {
+      const mostVotedLocation = await this.db
+        .select({ locationId: voteTable.locationId, voteCount: count(voteTable.locationId) })
+        .from(voteTable)
+        .where(eq(voteTable.meetId, meetId))
+        .groupBy(voteTable.locationId)
+        .orderBy(count(voteTable.locationId));
+
+      await this.db
+        .update(meetTable)
+        .set({ finalized: true, locationId: mostVotedLocation.pop().locationId } as unknown)
+        .where(eq(meetTable.id, meetId));
+    }
+  }
+
+  private async votersLeftOnMeet(meetId: number) {
+    return this.db
+      .select()
+      .from(userToMeetTable)
+      .leftJoin(voteTable, eq(userToMeetTable.userId, voteTable.createdBy))
+      .where(and(eq(userToMeetTable.meetId, meetId), isNull(voteTable.createdBy)));
   }
 }

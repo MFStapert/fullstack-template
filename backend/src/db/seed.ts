@@ -1,9 +1,10 @@
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import type { Sql } from 'postgres';
-import { locationTable, meetTable, schema, userTable, userToMeetTable } from './schema';
+import { locationTable, meetTable, schema, userTable, userToMeetTable, voteTable } from './schema';
 
 export async function seed(db: PostgresJsDatabase<typeof schema>, sql: Sql) {
   console.log('Running seed method...');
+  await db.delete(voteTable);
   await db.delete(userToMeetTable);
   await db.delete(meetTable);
   await db.delete(locationTable);
@@ -59,6 +60,7 @@ export async function seedMeets(db: PostgresJsDatabase<typeof schema>, sql: Sql)
     {
       id: 1,
       title: 'seed meet',
+      finalized: false,
       createdBy: 1,
       time: new Date(),
     },

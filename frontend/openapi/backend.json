@@ -89,6 +89,25 @@
         "tags": ["Meets"]
       }
     },
+    "/meets/{meetId}/votes": {
+      "get": {
+        "operationId": "MeetController_getVotes",
+        "parameters": [
+          { "name": "meetId", "required": true, "in": "path", "schema": { "type": "number" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/VoteDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Meets"]
+      }
+    },
     "/locations": {
       "get": {
         "operationId": "LocationController_getLocations",
@@ -175,6 +194,11 @@
         "required": ["id", "title"]
       },
       "CreateVoteDto": {
+        "type": "object",
+        "properties": { "createdBy": { "type": "number" }, "locationId": { "type": "number" } },
+        "required": ["createdBy", "locationId"]
+      },
+      "VoteDto": {
         "type": "object",
         "properties": { "createdBy": { "type": "number" }, "locationId": { "type": "number" } },
         "required": ["createdBy", "locationId"]

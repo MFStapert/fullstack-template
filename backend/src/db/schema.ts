@@ -26,7 +26,7 @@ export const meetTable = pgTable('meet', {
     .notNull()
     .references(() => userTable.id),
   time: timestamp('time').notNull(),
-  finalized: boolean('finalized').notNull().default(false),
+  finalized: boolean('finalized').notNull(),
   locationId: integer('location_id').references(() => locationTable.id),
 });
 
@@ -50,6 +50,15 @@ export const voteTable = pgTable(
   },
 );
 
+export const userToMeetTable = pgTable('user_to_meet', {
+  userId: integer('user_id')
+    .notNull()
+    .references(() => userTable.id),
+  meetId: integer('meet_id')
+    .notNull()
+    .references(() => meetTable.id),
+});
+
 export const meetsRelations = relations(meetTable, ({ many, one }) => ({
   meetToUsers: many(userToMeetTable),
   location: one(locationTable, {
@@ -61,15 +70,6 @@ export const meetsRelations = relations(meetTable, ({ many, one }) => ({
     references: [userTable.id],
   }),
 }));
-
-export const userToMeetTable = pgTable('user_to_meet', {
-  userId: integer('user_id')
-    .notNull()
-    .references(() => userTable.id),
-  meetId: integer('meet_id')
-    .notNull()
-    .references(() => meetTable.id),
-});
 
 export const usersToMeetsRelations = relations(userToMeetTable, ({ one }) => ({
   meet: one(meetTable, {
