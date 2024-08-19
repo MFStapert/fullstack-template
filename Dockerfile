@@ -41,6 +41,7 @@ HEALTHCHECK --interval=5s --timeout=1s --retries=10 \
 WORKDIR /app
 COPY --chown=node:node --from=build /prod/backend/dist dist
 COPY --chown=node:node --from=build /prod/backend/node_modules node_modules
+COPY --chown=node:node /backend/migrations migrations
 USER node
 
 CMD [ "node", "dist/src/main" ]

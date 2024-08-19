@@ -1,5 +1,5 @@
 import { meetTable, schema, userToMeetTable, voteTable } from '@db/schema';
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { and, count, eq, isNull } from 'drizzle-orm';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { CreateMeetDto } from '../dto/create-meet.dto';
@@ -9,6 +9,7 @@ import { toUserToMeet } from '../mappers/meet.mappers';
 
 @Injectable()
 export class MeetService {
+  private readonly logger = new Logger(MeetService.name);
   constructor(@Inject('DB') private db: PostgresJsDatabase<typeof schema>) {}
 
   async getMeetByUserId(userId: number): Promise<MeetOverviewDto[]> {
@@ -26,18 +27,23 @@ export class MeetService {
     const futureDate = new Date();
     futureDate.setMinutes(futureDate.getMinutes() + 2);
 
-    const [meet] = await this.db
-      .insert(meetTable)
-      .values({
-        title: createMeetDto.title,
-        time: futureDate,
-        createdBy: createMeetDto.createdBy,
-        finalized: false,
-      })
-      .returning();
+    try {
+      const [meet] = await this.db
+        .insert(meetTable)
+        .values({
+          title: createMeetDto.title,
+          time: futureDate,
+          createdBy: createMeetDto.createdBy,
+          finalized: false,
+        })
+        .returning();
 
-    await this.db.insert(userToMeetTable).values(toUserToMeet(meet.id, createMeetDto));
-    return this.getMeet(meet.id);
+      await this.db.insert(userToMeetTable).values(toUserToMeet(meet.id, createMeetDto));
+      return this.getMeet(meet.id);
+    } catch (e) {
+      this.logger.error(e);
+      throw new BadRequestException('Invalid meet');
+    }
   }
 
   async getMeet(id: number): Promise<MeetDetailDto> {

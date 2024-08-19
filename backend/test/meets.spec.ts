@@ -42,14 +42,14 @@ describe('meets e2e', () => {
     return request(app.getHttpServer())
       .post('/meets')
       .send(createMeetFactory({ users: [31, 92] }))
-      .expect(500);
+      .expect(400);
   });
 
   it('Create meet - invalid createdBy', () => {
     return request(app.getHttpServer())
       .post('/meets')
       .send(createMeetFactory({ createdBy: 31 }))
-      .expect(500);
+      .expect(400);
   });
 
   it('Get meet by id', () => {
@@ -89,7 +89,7 @@ describe('meets e2e', () => {
       createdBy: 2,
       locationId: 1,
     };
-    return request(app.getHttpServer()).post('/meets/1337/vote').send(voteDto).expect(500);
+    return request(app.getHttpServer()).post('/meets/1337/vote').send(voteDto).expect(400);
   });
 
   it('Create vote - invalid createdBy', () => {
@@ -97,7 +97,7 @@ describe('meets e2e', () => {
       createdBy: 9001,
       locationId: 1,
     };
-    return request(app.getHttpServer()).post('/meets/1/vote').send(voteDto).expect(500);
+    return request(app.getHttpServer()).post('/meets/1/vote').send(voteDto).expect(400);
   });
 
   it('Create vote - invalid location', () => {
@@ -105,7 +105,7 @@ describe('meets e2e', () => {
       createdBy: 2,
       locationId: 100,
     };
-    return request(app.getHttpServer()).post('/meets/1/vote').send(voteDto).expect(500);
+    return request(app.getHttpServer()).post('/meets/1/vote').send(voteDto).expect(400);
   });
 
   it('Create vote - finalize meet', async () => {
@@ -143,7 +143,7 @@ describe('meets e2e', () => {
       createdBy: 1,
       locationId: 2,
     };
-    return request(app.getHttpServer()).post('/meets/1/vote').send(voteDto).expect(500);
+    return request(app.getHttpServer()).post('/meets/1/vote').send(voteDto).expect(400);
   });
 
   it('Get votes by match id', () => {

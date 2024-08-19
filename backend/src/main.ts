@@ -3,7 +3,6 @@ import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as fs from 'node:fs';
-import * as process from 'node:process';
 import { AppModule } from './app.module';
 
 function setupSwagger(app: INestApplication) {
