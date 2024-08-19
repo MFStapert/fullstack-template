@@ -3,5 +3,6 @@
   "preset": "ts-jest",
   "moduleNameMapper": {
     "^@db/(.*)$": "<rootDir>/src/db/$1"
-  }
+  },
+  "testTimeout": 60000
 }
