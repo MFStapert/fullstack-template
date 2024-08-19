@@ -6,8 +6,4 @@ export const routes: Routes = [
     path: '',
     component: HomeComponent,
   },
-  {
-    path: 'posts',
-    loadChildren: () => import('./posts/posts.routes').then(m => m.routes),
-  },
 ];
