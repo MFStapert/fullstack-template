@@ -25,6 +25,9 @@ describe('locations e2e', () => {
     return request(app.getHttpServer())
       .get('/locations')
       .expect(200)
-      .expect([{ id: 1, title: 'Ijssel' }]);
+      .expect([
+        { id: 1, title: 'Ijssel' },
+        { id: 2, title: 'de_dust2' },
+      ]);
   });
 });
